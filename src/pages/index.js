@@ -1,22 +1,44 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+export default function IndexPage({ data }) {
+  const pics = data.allFile.edges.map(edge => {
+    const pic = edge.node.childImageSharp.fluid
+    return (
+      <div key={pic.src} style={{width: "25%"}}>
+        <Img fluid={pic} style={{display: "block", objectPosition: "center"}}/>
+      </div>
+    )
+  })
+  return (
+    <Layout>
+      <SEO title="Photos" />
+      <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
+    </Layout>
+  )
+}
 
-export default IndexPage
+export const query = graphql`
+  query {
+    allFile(
+      filter: {
+        extension: { regex: "/(png|jpg)/" }
+        sourceInstanceName: { eq: "images" }
+      }
+    ) {
+      edges {
+        node {
+          childImageSharp {
+            fluid(maxWidth: 500, maxHeight: 500) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`
