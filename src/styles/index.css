@@ -1,0 +1,24 @@
+.pic-wrapper {
+  transition: transform 0.5s;
+}
+.pic-wrapper:hover {
+  transform: scale(1.01);
+  z-index: 98;
+}
+
+.inc-dec-button {
+  font-size: 30px;
+  font-weight: bold;
+  background: transparent;
+  color: white;
+  border: solid 4px;
+  border-radius: 50%;
+  margin: 5px;
+  text-align: center;
+}
+.inc-dec-button:hover {
+  color: #cfcfcf
+}
+.inc-dec-button:focus {
+  outline: none;
+}

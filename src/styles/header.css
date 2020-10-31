@@ -2,3 +2,7 @@
   color: white;
   text-decoration: none;
 }
+
+.pageLink:hover {
+  border-bottom: solid white 2px;
+}

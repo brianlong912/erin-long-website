@@ -1,0 +1,21 @@
+.toTopButton {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 30px;
+  right: 40px;
+  z-index: 99;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  border: solid 4px;
+  background-color: transparent;
+  color: white
+}
+.toTopButton:hover {
+  color: #cfcfcf
+}
+.toTopButton:focus {
+  outline: none;
+}

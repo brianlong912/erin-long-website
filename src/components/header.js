@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import css from "../styles/header.module.css"
+import "../styles/header.css"
 
 const Header = ({ siteTitle }) => (
   <header
@@ -13,7 +13,7 @@ const Header = ({ siteTitle }) => (
       style={{
         margin: `0 auto`,
         maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
+        padding: `.9rem 1.0875rem`,
         textAlign: "center",
       }}
     >
@@ -32,17 +32,18 @@ const Header = ({ siteTitle }) => (
       <div
         style={{
           display: "flex",
-          padding: "0 18em",
+          padding: "0 25%",
+          height: "1.5em",
           justifyContent: "space-between",
         }}
       >
-        <Link to="/" className={css.pageLink}>
+        <Link to="/" className="pageLink">
           Photos
         </Link>
-        <Link to="/about" className={css.pageLink}>
+        <Link to="/about" className="pageLink">
           About
         </Link>
-        <Link to="/contact" className={css.pageLink}>
+        <Link to="/contact" className="pageLink">
           Contact
         </Link>
       </div>
