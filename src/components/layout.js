@@ -30,11 +30,11 @@ const Layout = ({ children }) => {
       <div style={{}}>
         <main>{children}</main>
         <ScrollTopButton />
-        <footer
+        {/* <footer
           style={{
             marginTop: `2rem`,
           }}
-        ></footer>
+        ></footer> */}
       </div>
     </>
   )

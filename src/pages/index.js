@@ -29,9 +29,13 @@ export default function IndexPage({ data }) {
       <div
         key={pic.src}
         className="pic-wrapper"
-        style={{ width: picWidth + "%" }}
+        style={{ width: picWidth + "%", overflow: "hidden" }}
       >
-        <Img fluid={pic} imgStyle={{ transition: "transform .5s" }} />
+        <Img
+          fluid={pic}
+          className={numPicsWide === 1 ? "pic-full" : "pic"}
+          imgStyle={{ transition: "transform .5s" }}
+        />
       </div>
     )
   })
@@ -49,8 +53,12 @@ export default function IndexPage({ data }) {
           flexDirection: "column",
         }}
       >
-        <button className="inc-dec-button" onClick={() => increasePics()}>+</button>
-        <button className="inc-dec-button" onClick={() => decreasePics()}>-</button>
+        <button className="inc-dec-button" onClick={() => increasePics()}>
+          +
+        </button>
+        <button className="inc-dec-button" onClick={() => decreasePics()}>
+          -
+        </button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
     </Layout>
