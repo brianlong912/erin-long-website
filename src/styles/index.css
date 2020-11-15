@@ -7,6 +7,9 @@
 }
 
 .inc-dec-button {
+  position: relative;
+  width: 100%;
+  padding: 100% 0 0 0;
   font-size: 30px;
   font-weight: bold;
   background: transparent;
@@ -14,11 +17,18 @@
   border: solid 3px;
   border-radius: 50%;
   margin: 5px;
-  text-align: center;
+  box-sizing: content-box;
 }
 .inc-dec-button:hover {
   color: #cfcfcf;
 }
 .inc-dec-button:focus {
   outline: none;
+}
+
+.inc-dec-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

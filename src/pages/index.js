@@ -51,13 +51,14 @@ export default function IndexPage({ data }) {
           zIndex: "99",
           display: "flex",
           flexDirection: "column",
+          width: "32px",
         }}
       >
         <button className="inc-dec-button" onClick={() => increasePics()}>
-          +
+          <div className="inc-dec-text">+</div>
         </button>
         <button className="inc-dec-button" onClick={() => decreasePics()}>
-          -
+          <div className="inc-dec-text">-</div>
         </button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
