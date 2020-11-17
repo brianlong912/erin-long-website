@@ -1,9 +1,14 @@
+.pic-wrapper {
+  padding: 0;
+  border: none;
+}
+
 .pic {
   transition: transform 0.5s;
 }
 .pic:hover {
   transform: scale(1.1);
-  z-index: 98;
+  z-index: 97;
 }
 
 .inc-dec-button {
