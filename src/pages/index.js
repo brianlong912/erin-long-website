@@ -11,6 +11,11 @@ export default function IndexPage({ data }) {
   const [modalImageId, setModalImageId] = useState(
     data.allImageSharp.edges[0].node.id
   )
+  const [modalImage, setModalImage] = useState(
+    data.allImageSharp.edges.find(e => {
+      return e.node.id === modalImageId
+    })
+  )
   let picWidth = 100 / numPicsWide
 
   /* Functions to incrase and decrease the size of the pictures on the screen */
@@ -25,17 +30,27 @@ export default function IndexPage({ data }) {
     }
   }
 
-  /* Find the correct image for the modal overlay of a selected iamge */
-  const modalImage = data.allImageSharp.edges.find(e => {
-    return e.node.id === modalImageId
-  })
-
+  // /* Find the correct image for the modal overlay of a selected iamge */
+  // const modalImage =
   /* function to toggle modal and set image for modal */
   function showImage(id) {
     var modalWindow = document.getElementById("modal")
     modalWindow.style.visibility = "visible"
     modalWindow.style.opacity = "1"
+
     setModalImageId(id)
+    setModalImage(
+      data.allImageSharp.edges.find(e => {
+        return e.node.id === modalImageId
+      })
+    )
+
+    var modalPic = document.getElementById("modalPic")
+    let aspect = modalImage.node.originalAspect.aspectRatio
+    let w = aspect * document.documentElement.clientHeight
+    modalPic.style.width = aspect > 1 ? "80%" : w + "px"
+    console.log(aspect)
+    console.log(w)
   }
 
   /* add event listener to modal window for user clicking off of image */
@@ -115,7 +130,7 @@ export default function IndexPage({ data }) {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <Img fixed={modalImage.node.originalAspect} />
+          <Img fluid={modalImage.node.originalAspect} />
         </div>
       </div>
     </Layout>
@@ -127,11 +142,11 @@ export const query = graphql`
     allImageSharp {
       edges {
         node {
-          square: fluid(maxWidth: 1000, maxHeight: 1000) {
+          square: fluid(maxWidth: 700, maxHeight: 700) {
             ...GatsbyImageSharpFluid
           }
-          originalAspect: fixed(height: 700) {
-            ...GatsbyImageSharpFixed
+          originalAspect: fluid(maxWidth: 1000) {
+            ...GatsbyImageSharpFluid
           }
           id
         }
