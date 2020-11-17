@@ -32,7 +32,9 @@ export default function IndexPage({ data }) {
 
   /* function to toggle modal and set image for modal */
   function showImage(id) {
-    document.getElementById("modal").style.display = "block"
+    var modalWindow = document.getElementById("modal")
+    modalWindow.style.visibility = "visible"
+    modalWindow.style.opacity = "1"
     setModalImageId(id)
   }
 
@@ -42,7 +44,8 @@ export default function IndexPage({ data }) {
     modalWindow.addEventListener("click", function (e) {
       const modalPic = document.getElementById("modalPic")
       if (!modalPic.contains(e.target)) {
-        modalWindow.style.display = "none"
+        modalWindow.style.visibility = "hidden"
+        modalWindow.style.opacity = "0"
       }
     })
   }
@@ -91,14 +94,15 @@ export default function IndexPage({ data }) {
       <div
         id="modal"
         style={{
-          display: "none",
+          visibility: "hidden",
+          opacity: 0,
+          transition: "opacity 0.25s linear",
           position: "fixed",
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
           backgroundColor: "rgba(51,51,51,.75)",
-          // opacity: "75%",
           zIndex: "99",
         }}
       >
