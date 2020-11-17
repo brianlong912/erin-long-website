@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
@@ -11,12 +11,29 @@ export default function IndexPage({ data }) {
   const [modalImageId, setModalImageId] = useState(
     data.allImageSharp.edges[0].node.id
   )
-  const [modalImage, setModalImage] = useState(
-    data.allImageSharp.edges.find(e => {
-      return e.node.id === modalImageId
-    })
-  )
-  let picWidth = 100 / numPicsWide
+
+  /* Find the correct image for the modal overlay of a selected iamge */
+  const modalImage = data.allImageSharp.edges.find(e => {
+    return e.node.id === modalImageId
+  })
+
+  /* Update the size of the picture wrapper for fluid pic */
+  useEffect(() => {
+    let aspect = modalImage.node.originalAspect.aspectRatio
+    let clientW = document.documentElement.clientWidth
+    let clientH = document.documentElement.clientHeight
+    let w = aspect * clientH
+    let h = (1 / aspect) * 0.8 * clientW
+    let modalPicElem = document.getElementById("modalPic")
+    // if (h>clientH && w<0.8*clientW) {
+    //   modalPicElem.style.width = w
+    // }else if (w>0.8*clientW && h<clientH){
+    //   modalPicElem.style.width = "80%"
+    // }
+    modalPicElem.style.width = w > clientW ? "80%" : w + "px"
+    // console.log(aspect)
+    console.log(clientW)
+  }, [modalImage])
 
   /* Functions to incrase and decrease the size of the pictures on the screen */
   function increasePics() {
@@ -30,8 +47,8 @@ export default function IndexPage({ data }) {
     }
   }
 
-  // /* Find the correct image for the modal overlay of a selected iamge */
-  // const modalImage =
+  let picWidth = 100 / numPicsWide
+
   /* function to toggle modal and set image for modal */
   function showImage(id) {
     var modalWindow = document.getElementById("modal")
@@ -39,19 +56,11 @@ export default function IndexPage({ data }) {
     modalWindow.style.opacity = "1"
 
     setModalImageId(id)
-    setModalImage(
-      data.allImageSharp.edges.find(e => {
-        return e.node.id === modalImageId
-      })
-    )
-
-    var modalPic = document.getElementById("modalPic")
-    let aspect = modalImage.node.originalAspect.aspectRatio
-    let w = aspect * document.documentElement.clientHeight
-    modalPic.style.width = aspect > 1 ? "80%" : w + "px"
-    console.log(aspect)
-    console.log(w)
   }
+
+  // const setWidth = async(elem) => {
+  //   await setModalImage()
+  // }
 
   /* add event listener to modal window for user clicking off of image */
   var modalWindow = document.getElementById("modal")
@@ -78,7 +87,7 @@ export default function IndexPage({ data }) {
         <Img
           fluid={pic}
           className={numPicsWide === 1 ? "pic-full" : "pic"}
-          imgStyle={{ transition: "transform .5s" }}
+          imgStyle={{ transition: "transform .5s", objectPosition: "center" }}
         />
       </button>
     )
