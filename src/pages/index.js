@@ -31,13 +31,22 @@ export default function IndexPage({ data }) {
     //   modalPicElem.style.width = "80%"
     // }
     modalPicElem.style.width = w > clientW ? "80%" : w + "px"
-    // console.log(aspect)
-    console.log(clientW)
+    /* add event listener to modal window for user clicking off of image */
+    var modalWindow = document.getElementById("modal")
+    if (modalWindow) {
+      modalWindow.addEventListener("click", function (e) {
+        const modalPic = document.getElementById("modalPic")
+        if (!modalPic.contains(e.target)) {
+          modalWindow.style.visibility = "hidden"
+          modalWindow.style.opacity = "0"
+        }
+      })
+    }
   }, [modalImage])
 
   /* Functions to incrase and decrease the size of the pictures on the screen */
   function increasePics() {
-    if (numPicsWide > 1) {
+    if (numPicsWide > 3) {
       setNumPicsWide(numPicsWide - 2)
     }
   }
@@ -61,18 +70,6 @@ export default function IndexPage({ data }) {
   // const setWidth = async(elem) => {
   //   await setModalImage()
   // }
-
-  /* add event listener to modal window for user clicking off of image */
-  var modalWindow = document.getElementById("modal")
-  if (modalWindow) {
-    modalWindow.addEventListener("click", function (e) {
-      const modalPic = document.getElementById("modalPic")
-      if (!modalPic.contains(e.target)) {
-        modalWindow.style.visibility = "hidden"
-        modalWindow.style.opacity = "0"
-      }
-    })
-  }
 
   /*Creates an array of elements of all of the photos from the graphql query */
   const pics = data.allImageSharp.edges.map(edge => {
@@ -115,21 +112,7 @@ export default function IndexPage({ data }) {
         </button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
-      <div
-        id="modal"
-        style={{
-          visibility: "hidden",
-          opacity: 0,
-          transition: "opacity 0.25s linear",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(51,51,51,.75)",
-          zIndex: "99",
-        }}
-      >
+      <div id="modal">
         <div
           id="modalPic"
           style={{

@@ -17,7 +17,7 @@
   padding: 100% 0 0 0;
   font-size: 30px;
   font-weight: bold;
-  background: transparent;
+  background-color: rgba(70, 70, 70, 0.5);
   color: white;
   border: solid 3px;
   border-radius: 50%;
@@ -36,4 +36,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#modal {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s linear;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(51, 51, 51, 0.75);
+  z-index: 99;
 }
