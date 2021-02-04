@@ -46,6 +46,7 @@ Layout.propTypes = {
 
 
 function ScrollTopButton() {
+  var yPos = window.pageYOffset;
   function toTopFunction() {
     document.body.scrollTop = 0 //For Safari?
     document.documentElement.scrollTop = 0 //for other browsers
@@ -56,10 +57,23 @@ function ScrollTopButton() {
       id="toTopButton"
       className="toTopButton"
       onClick={() => toTopFunction()}
+      style={{opacity: yPos?"1":"0"}}
     >
       <ArrowUp style={{width: "50px", height: "50px"}}/>
     </button>
   )
 }
+
+function handleScroll() {
+  var yPos = window.pageYOffset;
+  var toTopButton = document.getElementById("toTopButton");
+  if(yPos){
+    toTopButton.style.opacity = "1";
+  }else{
+    toTopButton.style.opacity = "0";
+  }
+}
+
+document.addEventListener("scroll", handleScroll);
 
 export default Layout
