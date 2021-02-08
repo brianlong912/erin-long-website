@@ -4,6 +4,7 @@ import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Modal from "../components/modal"
 import "../styles/index.css"
 
 export default function IndexPage({ data }) {
@@ -15,6 +16,12 @@ export default function IndexPage({ data }) {
   /* Find the correct image for the modal overlay of a selected iamge */
   const modalImage = data.allImageSharp.edges.find(e => {
     return e.node.id === modalImageId
+  })
+
+  const modalInfo = data.allImagesJson.edges.find(e => {
+    console.log(e.node.title)
+    console.log(modalImage.node.parent.relativeDirectory)
+    return e.node.title === modalImage.node.parent.relativeDirectory
   })
 
   /* Update the size of the picture wrapper for fluid pic */
@@ -30,7 +37,7 @@ export default function IndexPage({ data }) {
     // }else if (w>0.8*clientW && h<clientH){
     //   modalPicElem.style.width = "80%"
     // }
-    modalPicElem.style.width = w > clientW ? "80%" : w + "px"
+    modalPicElem.style.width = w > clientW * 0.8 ? "80%" : w + "px"
     /* add event listener to modal window for user clicking off of image */
     var modalWindow = document.getElementById("modal")
     if (modalWindow) {
@@ -67,10 +74,6 @@ export default function IndexPage({ data }) {
     setModalImageId(id)
   }
 
-  // const setWidth = async(elem) => {
-  //   await setModalImage()
-  // }
-
   /*Creates an array of elements of all of the photos from the graphql query */
   const pics = data.allImageSharp.edges.map(edge => {
     const pic = edge.node.square
@@ -78,7 +81,7 @@ export default function IndexPage({ data }) {
       <button
         key={edge.id}
         className="pic-wrapper"
-        style={{ width: picWidth + "%", overflow: "hidden" }}
+        style={{ width: picWidth + "%", overflow: "hidden", cursor: "pointer" }}
         onClick={() => showImage(edge.node.id)}
       >
         <Img
@@ -93,6 +96,8 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
       <SEO title="Photos" />
+
+      {/* Buttons on the bottom left to increase and decrease the image sizes */}
       <div
         style={{
           position: "fixed",
@@ -111,20 +116,12 @@ export default function IndexPage({ data }) {
           <div className="inc-dec-text">-</div>
         </button>
       </div>
+
+      {/* All images shown here */}
       <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
-      <div id="modal">
-        <div
-          id="modalPic"
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <Img fluid={modalImage.node.originalAspect} />
-        </div>
-      </div>
+
+      {/* Modal element for clicking on image */}
+      <Modal modalImage={modalImage} modalInfo={modalInfo}/>
     </Layout>
   )
 }
@@ -134,6 +131,11 @@ export const query = graphql`
     allImageSharp {
       edges {
         node {
+          parent {
+            ... on File {
+              relativeDirectory
+            }
+          }
           square: fluid(maxWidth: 700, maxHeight: 700) {
             ...GatsbyImageSharpFluid
           }
@@ -141,6 +143,16 @@ export const query = graphql`
             ...GatsbyImageSharpFluid
           }
           id
+        }
+      }
+    }
+    allImagesJson {
+      edges {
+        node {
+          title
+          size
+          medium
+          description
         }
       }
     }

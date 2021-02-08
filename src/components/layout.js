@@ -57,7 +57,7 @@ function ScrollTopButton() {
       id="toTopButton"
       className="toTopButton"
       onClick={() => toTopFunction()}
-      style={{opacity: yPos?"1":"0"}}
+      style={{opacity: yPos?"1":"0", visibility: yPos?"visible":"hidden"}}
     >
       <ArrowUp style={{width: "50px", height: "50px"}}/>
     </button>
@@ -69,8 +69,10 @@ function handleScroll() {
   var toTopButton = document.getElementById("toTopButton");
   if(yPos){
     toTopButton.style.opacity = "1";
+    toTopButton.style.visibility = "visible";
   }else{
     toTopButton.style.opacity = "0";
+    toTopButton.style.visibility = "hidden";
   }
 }
 
