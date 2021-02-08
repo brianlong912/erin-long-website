@@ -18,9 +18,7 @@ export default function IndexPage({ data }) {
     return e.node.id === modalImageId
   })
 
-  const modalInfo = data.allImagesJson.edges.find(e => {
-    console.log(e.node.title)
-    console.log(modalImage.node.parent.relativeDirectory)
+  const modalInfo = data.allInfo.edges.find(e => {
     return e.node.title === modalImage.node.parent.relativeDirectory
   })
 
@@ -146,7 +144,7 @@ export const query = graphql`
         }
       }
     }
-    allImagesJson {
+    allInfo {
       edges {
         node {
           title

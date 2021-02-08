@@ -16,7 +16,7 @@ function Modal( props ) {
         <Img fluid={props.modalImage.node.originalAspect} />
       </div>
       <div id="modalInfo">
-          {props.modalInfo.node.title}
+          {props.modalInfo?props.modalInfo.node.title:""}
       </div>
     </div>
   )
