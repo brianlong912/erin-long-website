@@ -27,15 +27,10 @@ export default function IndexPage({ data }) {
     let aspect = modalImage.node.originalAspect.aspectRatio
     let clientW = document.documentElement.clientWidth
     let clientH = document.documentElement.clientHeight
-    let w = aspect * clientH
-    let h = (1 / aspect) * 0.8 * clientW
+    let w = aspect * clientH * 0.9
     let modalPicElem = document.getElementById("modalPic")
-    // if (h>clientH && w<0.8*clientW) {
-    //   modalPicElem.style.width = w
-    // }else if (w>0.8*clientW && h<clientH){
-    //   modalPicElem.style.width = "80%"
-    // }
-    modalPicElem.style.width = w > clientW * 0.8 ? "80%" : w + "px"
+    modalPicElem.style.width = w > clientW * 0.45 ? "45%" : w + "px"
+    
     /* add event listener to modal window for user clicking off of image */
     var modalWindow = document.getElementById("modal")
     if (modalWindow) {
