@@ -29,14 +29,15 @@ export default function IndexPage({ data }) {
     let clientH = document.documentElement.clientHeight
     let w = aspect * clientH * 0.9
     let modalPicElem = document.getElementById("modalPic")
-    modalPicElem.style.width = w > clientW * 0.45 ? "45%" : w + "px"
-    
+    modalPicElem.style.width = w > clientW * 0.45 ? "45vw" : w + "px"
+
     /* add event listener to modal window for user clicking off of image */
     var modalWindow = document.getElementById("modal")
     if (modalWindow) {
       modalWindow.addEventListener("click", function (e) {
         const modalPic = document.getElementById("modalPic")
-        if (!modalPic.contains(e.target)) {
+        const modalInfoElem = document.getElementById("modalInfo")
+        if (!modalPic.contains(e.target) && !modalInfoElem.contains(e.target)) {
           modalWindow.style.visibility = "hidden"
           modalWindow.style.opacity = "0"
         }

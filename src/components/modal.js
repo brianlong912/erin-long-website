@@ -15,33 +15,39 @@ function Modal(props) {
       </div>
     )
   }
+
+  /* Main modal element to create and return */
   return (
     <div id="modal">
       <div
-        id="modalPic"
+        id="modalContent"
         style={{
+          display: "flex",
           position: "absolute",
           top: "50%",
-          left: info ? "25%" : "50%",
-          transform: "translate(-50%, -50%)",
+          left: "50%",
+          transform: "translate(-50%,-50%)",
         }}
       >
-        <Img fluid={props.modalImage.node.originalAspect} />
-      </div>
-      <div
-        id="modalInfo"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "75%",
-          transform: "translate(-50%, -50%)",
-          width: "40%",
-          backgroundColor: info ? "#2f2f2f" : "unset",
-          padding: "20px",
-          boxSizing: "border-box",
-        }}
-      >
-        {info}
+        {/* Modal Image to be displayed */}
+        <div
+          id="modalPic"
+        >
+          <Img fluid={props.modalImage.node.originalAspect} />
+        </div>
+        {/* Modal Information to be shown, relating to the image */}
+        <div
+          id="modalInfo"
+          style={{
+            display: info ? "block" : "none",
+            width: "18em",
+            backgroundColor: "#2f2f2f",
+            padding: "20px",
+            boxSizing: "border-box",
+          }}
+        >
+          {info}
+        </div>
       </div>
     </div>
   )
