@@ -49,7 +49,10 @@ Layout.propTypes = {
 }
 
 function ScrollTopButton() {
-  var yPos = window.pageYOffset
+  var yPos;
+  useEffect(() => {
+    yPos = window.pageYOffset
+  })
   function toTopFunction() {
     document.body.scrollTop = 0 //For Safari?
     document.documentElement.scrollTop = 0 //for other browsers
