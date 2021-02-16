@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { FaArrowUp as ArrowUp } from "react-icons/fa"
@@ -23,6 +23,10 @@ const Layout = ({ children }) => {
       }
     }
   `)
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+  })
 
   return (
     <>
@@ -44,9 +48,8 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-
 function ScrollTopButton() {
-  var yPos = window.pageYOffset;
+  var yPos = window.pageYOffset
   function toTopFunction() {
     document.body.scrollTop = 0 //For Safari?
     document.documentElement.scrollTop = 0 //for other browsers
@@ -57,25 +60,26 @@ function ScrollTopButton() {
       id="toTopButton"
       className="toTopButton"
       onClick={() => toTopFunction()}
-      style={{opacity: yPos?"1":"0", visibility: yPos?"visible":"hidden"}}
+      style={{
+        opacity: yPos ? "1" : "0",
+        visibility: yPos ? "visible" : "hidden",
+      }}
     >
-      <ArrowUp style={{width: "50px", height: "50px"}}/>
+      <ArrowUp style={{ width: "50px", height: "50px" }} />
     </button>
   )
 }
 
 function handleScroll() {
-  var yPos = window.pageYOffset;
-  var toTopButton = document.getElementById("toTopButton");
-  if(yPos){
-    toTopButton.style.opacity = "1";
-    toTopButton.style.visibility = "visible";
-  }else{
-    toTopButton.style.opacity = "0";
-    toTopButton.style.visibility = "hidden";
+  var yPos = window.pageYOffset
+  var toTopButton = document.getElementById("toTopButton")
+  if (yPos) {
+    toTopButton.style.opacity = "1"
+    toTopButton.style.visibility = "visible"
+  } else {
+    toTopButton.style.opacity = "0"
+    toTopButton.style.visibility = "hidden"
   }
 }
-
-document.addEventListener("scroll", handleScroll);
 
 export default Layout
