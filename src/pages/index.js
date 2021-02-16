@@ -19,7 +19,7 @@ export default function IndexPage({ data }) {
   })
 
   const modalInfo = data.allInfo.edges.find(e => {
-    return e.node.title === modalImage.node.parent.relativeDirectory
+    return e.node.parent.relativeDirectory === modalImage.node.parent.relativeDirectory
   })
 
   /* Update the size of the picture wrapper for fluid pic */
@@ -43,7 +43,7 @@ export default function IndexPage({ data }) {
         }
       })
     }
-  }, [modalImage])
+  })
 
   /* Functions to incrase and decrease the size of the pictures on the screen */
   function increasePics() {
@@ -71,6 +71,9 @@ export default function IndexPage({ data }) {
   /*Creates an array of elements of all of the photos from the graphql query */
   const pics = data.allImageSharp.edges.map(edge => {
     const pic = edge.node.square
+    if (pic.originalName === "erin.jpg") {
+      return null
+    }
     return (
       <button
         key={edge.id}
@@ -115,7 +118,7 @@ export default function IndexPage({ data }) {
       <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
 
       {/* Modal element for clicking on image */}
-      <Modal modalImage={modalImage} modalInfo={modalInfo}/>
+      <Modal modalImage={modalImage} modalInfo={modalInfo} />
     </Layout>
   )
 }
@@ -132,6 +135,7 @@ export const query = graphql`
           }
           square: fluid(maxWidth: 700, maxHeight: 700) {
             ...GatsbyImageSharpFluid
+            originalName
           }
           originalAspect: fluid(maxWidth: 1000) {
             ...GatsbyImageSharpFluid
@@ -143,6 +147,11 @@ export const query = graphql`
     allInfo {
       edges {
         node {
+          parent {
+            ... on File {
+              relativeDirectory
+            }
+          }
           title
           size
           medium
