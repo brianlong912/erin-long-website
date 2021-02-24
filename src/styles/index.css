@@ -1,6 +1,8 @@
 .pic-wrapper {
   padding: 0;
   border: none;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .pic {
@@ -26,6 +28,7 @@
 }
 .inc-dec-button:hover {
   color: #cfcfcf;
+  cursor: pointer;
 }
 .inc-dec-button:focus {
   outline: none;

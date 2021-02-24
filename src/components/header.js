@@ -6,35 +6,37 @@ import "../styles/header.css"
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: "#222222",
+      background: "#191919",
     }}
   >
     <div
       style={{
+        display: "flex",
         margin: `0 auto`,
-        maxWidth: 960,
-        padding: `.9rem 1.08rem .4rem 1.08rem`,
+        padding: `1.2rem 1.1rem`,
         textAlign: "center",
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <div style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
             color: `white`,
             textDecoration: `none`,
+            fontSize: "2.5rem",
           }}
         >
           {siteTitle}
         </Link>
-      </h1>
-      <p>- Photography -</p>
+      </div>
       <div
         style={{
           display: "flex",
-          padding: "0 25%",
-          height: "1.5em",
           justifyContent: "space-between",
+          position: "absolute",
+          right: "4em",
+          height: "1.5em",
+          width: "18em",
         }}
       >
         <Link to="/" className="pageLink">

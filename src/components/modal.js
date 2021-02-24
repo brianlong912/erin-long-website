@@ -1,6 +1,8 @@
 import React from "react"
 import Img from "gatsby-image"
 
+import { FaTimes as Close } from "react-icons/fa"
+
 function Modal(props) {
   /* Conditionally render the Image Info with the modal */
   let info
@@ -19,8 +21,11 @@ function Modal(props) {
   /* Main modal element to create and return */
   return (
     <div id="modal">
+      <button style={{ position: "absolute", right: "1.25em", top: "1.25em", background: "transparent", borderRadius: "50%", color: "inherit", border: "white" }}>
+        <Close style={{width: "2.5rem", height: "2.5rem"}}/>
+      </button>
       <div
-        id="modalContent"
+        id="modal-content"
         style={{
           display: "flex",
           position: "absolute",
@@ -30,14 +35,12 @@ function Modal(props) {
         }}
       >
         {/* Modal Image to be displayed */}
-        <div
-          id="modalPic"
-        >
+        <div id="modal-pic">
           <Img fluid={props.modalImage.node.originalAspect} />
         </div>
         {/* Modal Information to be shown, relating to the image */}
         <div
-          id="modalInfo"
+          id="modal-info"
           style={{
             display: info ? "block" : "none",
             width: "18em",
