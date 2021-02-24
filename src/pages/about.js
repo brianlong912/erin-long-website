@@ -41,7 +41,7 @@ export const query = graphql`
       }
     }
     imageSharp(fluid: { originalName: { eq: "erin.jpg" } }) {
-      fluid {
+      fluid (maxWidth: 700, maxHeight: 700){
         ...GatsbyImageSharpFluid
       }
     }
