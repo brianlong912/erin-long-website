@@ -1,0 +1,9 @@
+#about-image {
+    flex: 1;
+    margin: 3%
+}
+
+#about-info {
+    flex: 1;
+    margin: auto 3%
+}

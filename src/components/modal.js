@@ -20,7 +20,7 @@ function Modal(props) {
   return (
     <div id="modal">
       <div
-        id="modalContent"
+        id="modal-content"
         style={{
           display: "flex",
           position: "absolute",
@@ -31,13 +31,13 @@ function Modal(props) {
       >
         {/* Modal Image to be displayed */}
         <div
-          id="modalPic"
+          id="modal-pic"
         >
           <Img fluid={props.modalImage.node.originalAspect} />
         </div>
         {/* Modal Information to be shown, relating to the image */}
         <div
-          id="modalInfo"
+          id="modal-info"
           style={{
             display: info ? "block" : "none",
             width: "18em",
