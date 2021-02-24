@@ -66,6 +66,7 @@ function ScrollTopButton() {
       style={{
         opacity: yPos ? "1" : "0",
         visibility: yPos ? "visible" : "hidden",
+        cursor: "pointer",
       }}
     >
       <ArrowUp style={{ width: "50px", height: "50px" }} />

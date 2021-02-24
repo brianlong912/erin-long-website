@@ -78,7 +78,7 @@ export default function IndexPage({ data }) {
       <button
         key={edge.id}
         className="pic-wrapper"
-        style={{ width: picWidth + "%", overflow: "hidden", cursor: "pointer" }}
+        style={{ width: picWidth + "%"}}
         onClick={() => showImage(edge.node.id)}
       >
         <Img
