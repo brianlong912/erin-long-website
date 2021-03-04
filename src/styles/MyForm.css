@@ -1,0 +1,30 @@
+.form-small-elements {
+  display: flex;
+}
+
+.form-small {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0.75em 2em;
+}
+
+.form-large {
+  display: flex;
+  flex-direction: column;
+  margin: 0.75em 2em;
+}
+
+.form-input {
+  border: none;
+  border-radius: 1%;
+}
+
+.form-submit {
+  float: right;
+  margin: .5em 2em;
+  background-color: #191919;
+  color: white;
+  border: none;
+  padding: 0.4em 1em;
+}

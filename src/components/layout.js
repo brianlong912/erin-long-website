@@ -29,18 +29,18 @@ const Layout = ({ children }) => {
   })
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div style={{}}>
-        <main>{children}</main>
-        <ScrollTopButton />
-        {/* <footer
+      <>
+        <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+        <div style={{}}>
+          <main>{children}</main>
+          <ScrollTopButton />
+          {/* <footer
           style={{
             marginTop: `2rem`,
           }}
         ></footer> */}
-      </div>
-    </>
+        </div>
+      </>
   )
 }
 
@@ -49,7 +49,7 @@ Layout.propTypes = {
 }
 
 function ScrollTopButton() {
-  var yPos;
+  var yPos
   useEffect(() => {
     yPos = window.pageYOffset
   })

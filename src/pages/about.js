@@ -7,17 +7,22 @@ import SEO from "../components/seo"
 
 import "../styles/about.css"
 
-export default function about({ data }) {
+export default function About({ data }) {
   const aboutInfo = data.allInfo.edges.find(e => {
     return e.node.name
   })
 
-  console.log(aboutInfo)
-
   return (
     <Layout>
       <SEO title="About" />
-      <div style={{display: "flex", padding: "3% 15%"}}>
+      <div
+        style={{
+          display: "flex",
+          margin: "auto",
+          width: "1000px",
+          paddingTop: "20vh",
+        }}
+      >
         <div id="about-image">
           <Img fluid={data.imageSharp.fluid} />
         </div>
@@ -41,7 +46,7 @@ export const query = graphql`
       }
     }
     imageSharp(fluid: { originalName: { eq: "erin.jpg" } }) {
-      fluid (maxWidth: 700, maxHeight: 700){
+      fluid(maxWidth: 700, maxHeight: 700) {
         ...GatsbyImageSharpFluid
       }
     }

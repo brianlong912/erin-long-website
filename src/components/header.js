@@ -14,10 +14,9 @@ const Header = ({ siteTitle }) => (
         display: "flex",
         margin: `0 auto`,
         padding: `1.2rem 1.1rem`,
-        textAlign: "center",
       }}
     >
-      <div style={{ margin: 0 }}>
+      <div style={{ width: "50%" }}>
         <Link
           to="/"
           style={{
@@ -32,11 +31,9 @@ const Header = ({ siteTitle }) => (
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          position: "absolute",
-          right: "4em",
+          justifyContent: "right",
           height: "1.5em",
-          width: "18em",
+          width: "50%",
         }}
       >
         <Link to="/" className="pageLink">
