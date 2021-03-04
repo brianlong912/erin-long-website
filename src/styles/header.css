@@ -1,6 +1,7 @@
 .pageLink {
   color: white;
   text-decoration: none;
+  margin: 0 1.8em;
 }
 
 .pageLink:hover {
