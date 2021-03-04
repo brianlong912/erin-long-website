@@ -19,7 +19,10 @@ export default function IndexPage({ data }) {
   })
 
   const modalInfo = data.allInfo.edges.find(e => {
-    return e.node.parent.relativeDirectory === modalImage.node.parent.relativeDirectory
+    return (
+      e.node.parent.relativeDirectory ===
+      modalImage.node.parent.relativeDirectory
+    )
   })
 
   /* Update the size of the picture wrapper for fluid pic */
@@ -78,7 +81,7 @@ export default function IndexPage({ data }) {
       <button
         key={edge.id}
         className="pic-wrapper"
-        style={{ width: picWidth + "%"}}
+        style={{ width: picWidth + "%" }}
         onClick={() => showImage(edge.node.id)}
       >
         <Img
@@ -91,35 +94,35 @@ export default function IndexPage({ data }) {
   })
 
   return (
-    <Layout>
-      <SEO title="Photos" />
+      <Layout>
+        <SEO title="Photos" />
 
-      {/* Buttons on the bottom left to increase and decrease the image sizes */}
-      <div
-        style={{
-          position: "fixed",
-          left: "30px",
-          bottom: "30px",
-          zIndex: "98",
-          display: "flex",
-          flexDirection: "column",
-          width: "32px",
-        }}
-      >
-        <button className="inc-dec-button" onClick={() => increasePics()}>
-          <div className="inc-dec-text">+</div>
-        </button>
-        <button className="inc-dec-button" onClick={() => decreasePics()}>
-          <div className="inc-dec-text">-</div>
-        </button>
-      </div>
+        {/* Buttons on the bottom left to increase and decrease the image sizes */}
+        <div
+          style={{
+            position: "fixed",
+            left: "30px",
+            bottom: "30px",
+            zIndex: "98",
+            display: "flex",
+            flexDirection: "column",
+            width: "32px",
+          }}
+        >
+          <button className="inc-dec-button" onClick={() => increasePics()}>
+            <div className="inc-dec-text">+</div>
+          </button>
+          <button className="inc-dec-button" onClick={() => decreasePics()}>
+            <div className="inc-dec-text">-</div>
+          </button>
+        </div>
 
-      {/* All images shown here */}
-      <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
+        {/* All images shown here */}
+        <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
 
-      {/* Modal element for clicking on image */}
-      <Modal modalImage={modalImage} modalInfo={modalInfo} />
-    </Layout>
+        {/* Modal element for clicking on image */}
+        <Modal modalImage={modalImage} modalInfo={modalInfo} />
+      </Layout>
   )
 }
 
