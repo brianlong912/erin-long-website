@@ -21,8 +21,19 @@ function Modal(props) {
   /* Main modal element to create and return */
   return (
     <div id="modal">
-      <button style={{ position: "absolute", right: "1.25em", top: "1.25em", background: "transparent", borderRadius: "50%", color: "inherit", border: "white" }}>
-        <Close style={{width: "2.5rem", height: "2.5rem"}}/>
+      <button
+        style={{
+          position: "absolute",
+          right: "1.25em",
+          top: "1.25em",
+          background: "transparent",
+          borderRadius: "50%",
+          color: "inherit",
+          border: "white",
+          cursor: "pointer"
+        }}
+      >
+        <Close style={{ width: "2.5rem", height: "2.5rem" }} />
       </button>
       <div
         id="modal-content"

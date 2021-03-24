@@ -31,7 +31,7 @@ const Header = ({ siteTitle }) => (
       <div
         style={{
           display: "flex",
-          justifyContent: "right",
+          justifyContent: "flex-end",
           height: "1.5em",
           width: "50%",
         }}

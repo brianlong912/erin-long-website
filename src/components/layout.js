@@ -54,8 +54,9 @@ function ScrollTopButton() {
     yPos = window.pageYOffset
   })
   function toTopFunction() {
-    document.body.scrollTop = 0 //For Safari?
-    document.documentElement.scrollTop = 0 //for other browsers
+    window.scroll({top: "0", behavior: "smooth"})
+    // document.body.scrollTop = 0 //For Safari?
+    // document.documentElement.scrollTop = 0 //for other browsers
   }
 
   return (
