@@ -30,11 +30,11 @@ export default class MyForm extends React.Component {
           <div style={{margin: "1em 2em", fontSize: ".9em"}}>Send me a message and I will get back to you as soon as possible</div>
           <div className="form-small-elements">
             <div className="form-small">
-              <label>Name</label>
+              <label htmlFor="name">Name</label>
               <input type="text" name="name" className="form-input" required />
             </div>
             <div className="form-small">
-              <label>Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 name="email"
@@ -44,7 +44,7 @@ export default class MyForm extends React.Component {
             </div>
           </div>
           <div className="form-large">
-            <label>Message</label>
+            <label htmlFor="message">Message</label>
             <textarea
               name="message"
               className="form-input"
