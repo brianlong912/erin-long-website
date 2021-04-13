@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { FaArrowUp as ArrowUp } from "react-icons/fa"
@@ -24,6 +24,7 @@ const Layout = ({ children }) => {
     }
   `)
 
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
   })
@@ -31,7 +32,7 @@ const Layout = ({ children }) => {
   return (
       <>
         <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-        <div style={{}}>
+        <div className="content">
           <main>{children}</main>
           <ScrollTopButton />
           {/* <footer
