@@ -43,7 +43,7 @@ function Modal(props) {
     //     }
     //   })
     // }
-  })
+  },[props.modalImage.node.originalAspect.aspectRatio])
 
   function handleModalClick(e) {
     const modalPic = document.getElementById("modal-pic")
@@ -62,6 +62,7 @@ function Modal(props) {
 
   /* Main modal element to create and return */
   return (
+    /* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events*/
     <div
       id="modal"
       style={{
