@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout renders correctly 1`] = `
+Array [
+  <header
+    style={
+      Object {
+        "background": "#191919",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "margin": "0 auto",
+          "padding": "1.2rem 1.1rem",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+      >
+        <a
+          href="/"
+          style={
+            Object {
+              "color": "white",
+              "fontSize": "2.5rem",
+              "textDecoration": "none",
+            }
+          }
+        >
+          Erin Long
+        </a>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "height": "1.5em",
+            "justifyContent": "flex-end",
+            "width": "50%",
+          }
+        }
+      >
+        <a
+          className="pageLink"
+          href="/"
+        >
+          Photos
+        </a>
+        <a
+          className="pageLink"
+          href="/about"
+        >
+          About
+        </a>
+        <a
+          className="pageLink"
+          href="/contact"
+        >
+          Contact
+        </a>
+      </div>
+    </div>
+  </header>,
+  <div
+    style={Object {}}
+  >
+    <main />
+    <button
+      className="toTopButton"
+      id="toTopButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+          "opacity": "0",
+          "visibility": "hidden",
+        }
+      }
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+            "height": "50px",
+            "width": "50px",
+          }
+        }
+        viewBox="0 0 448 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"
+        />
+      </svg>
+    </button>
+  </div>,
+]
+`;
+
+exports[`rendering layout renders correctly 1`] = `
+Array [
+  <header
+    style={
+      Object {
+        "background": "#191919",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "margin": "0 auto",
+          "padding": "1.2rem 1.1rem",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+      >
+        <a
+          href="/"
+          style={
+            Object {
+              "color": "white",
+              "fontSize": "2.5rem",
+              "textDecoration": "none",
+            }
+          }
+        >
+          Erin Long
+        </a>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "height": "1.5em",
+            "justifyContent": "flex-end",
+            "width": "50%",
+          }
+        }
+      >
+        <a
+          className="pageLink"
+          href="/"
+        >
+          Photos
+        </a>
+        <a
+          className="pageLink"
+          href="/about"
+        >
+          About
+        </a>
+        <a
+          className="pageLink"
+          href="/contact"
+        >
+          Contact
+        </a>
+      </div>
+    </div>
+  </header>,
+  <div
+    style={Object {}}
+  >
+    <main />
+    <button
+      className="toTopButton"
+      id="toTopButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+          "opacity": "0",
+          "visibility": "hidden",
+        }
+      }
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+            "height": "50px",
+            "width": "50px",
+          }
+        }
+        viewBox="0 0 448 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"
+        />
+      </svg>
+    </button>
+  </div>,
+]
+`;
