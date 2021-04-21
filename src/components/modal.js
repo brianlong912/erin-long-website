@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useRef } from "react"
 import Img from "gatsby-image"
+import mojs from "@mojs/core"
 
 import { FaTimes as Close } from "react-icons/fa"
+import CloseButton from "./closeButton"
 
 function Modal(props) {
   /* Conditionally render the Image Info with the modal */
@@ -22,6 +24,7 @@ function Modal(props) {
   return (
     <div id="modal">
       <button
+        id="close-button"
         style={{
           position: "absolute",
           right: "1.25em",
@@ -30,10 +33,11 @@ function Modal(props) {
           borderRadius: "50%",
           color: "inherit",
           border: "white",
-          cursor: "pointer"
+          cursor: "pointer",
         }}
       >
-        <Close style={{ width: "2.5rem", height: "2.5rem" }} />
+        <CloseButton duration={500} />
+        {/* <Close style={{ width: "2.5rem", height: "2.5rem" }} /> */}
       </button>
       <div
         id="modal-content"
