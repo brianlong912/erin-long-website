@@ -7,14 +7,14 @@ exports[`Modal render renders correctly with modalInfo 1`] = `
   style={
     Object {
       "backgroundColor": "rgba(43, 43, 43, 0.705)",
-      "height": "100%",
+      "bottom": "0",
       "left": "0",
       "opacity": "0",
+      "pointerEvents": "none",
       "position": "fixed",
+      "right": "0",
       "top": "0",
       "transition": "opacity 0.4s linear",
-      "visibility": "hidden",
-      "width": "100%",
       "zIndex": "99",
     }
   }
@@ -58,6 +58,7 @@ exports[`Modal render renders correctly with modalInfo 1`] = `
   </button>
   <div
     id="modal-content"
+    onClick={[Function]}
     style={
       Object {
         "display": "flex",
@@ -209,14 +210,14 @@ exports[`Modal render renders correctly without modalInfo 1`] = `
   style={
     Object {
       "backgroundColor": "rgba(43, 43, 43, 0.705)",
-      "height": "100%",
+      "bottom": "0",
       "left": "0",
       "opacity": "0",
+      "pointerEvents": "none",
       "position": "fixed",
+      "right": "0",
       "top": "0",
       "transition": "opacity 0.4s linear",
-      "visibility": "hidden",
-      "width": "100%",
       "zIndex": "99",
     }
   }
@@ -260,6 +261,7 @@ exports[`Modal render renders correctly without modalInfo 1`] = `
   </button>
   <div
     id="modal-content"
+    onClick={[Function]}
     style={
       Object {
         "display": "flex",

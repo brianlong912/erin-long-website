@@ -39,7 +39,7 @@ test("modal closes with close button", () => {
   )
   
   //expect modal to initially be visible
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 
   //Clicking of button
   fireEvent.click(getByTestId("modal-close-button"))
@@ -50,7 +50,7 @@ test("modal closes with close button", () => {
       setModalVisible={mockSetModalVisible}
     />
   )
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: hidden")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 0")
 })
 
 test("modal closes with pressing outside of image and info (both present)", () => {
@@ -67,7 +67,7 @@ test("modal closes with pressing outside of image and info (both present)", () =
     />
   )
   
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 
   fireEvent.click(container.querySelector("#modal"))
   rerender(
@@ -78,7 +78,7 @@ test("modal closes with pressing outside of image and info (both present)", () =
       setModalVisible={mockSetModalVisible}
     />
   )
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: hidden")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 0")
 })
 
 test("modal closes with pressing outside of image (no info present)", () => {
@@ -94,7 +94,7 @@ test("modal closes with pressing outside of image (no info present)", () => {
     />
   )
   
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 
   fireEvent.click(container.querySelector("#modal"))
   rerender(
@@ -105,7 +105,7 @@ test("modal closes with pressing outside of image (no info present)", () => {
       setModalVisible={mockSetModalVisible}
     />
   )
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: hidden")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 0")
 })
 
 test("modal does not close when pressing on image", () => {
@@ -122,7 +122,7 @@ test("modal does not close when pressing on image", () => {
     />
   )
   
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 
   fireEvent.click(container.querySelector("#modal-pic"))
   rerender(
@@ -133,7 +133,7 @@ test("modal does not close when pressing on image", () => {
       setModalVisible={mockSetModalVisible}
     />
   )
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 })
 
 test("modal does not close when pressing info (info present)", () => {
@@ -150,7 +150,7 @@ test("modal does not close when pressing info (info present)", () => {
     />
   )
   
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 
   fireEvent.click(container.querySelector("#modal-info"))
   rerender(
@@ -161,7 +161,7 @@ test("modal does not close when pressing info (info present)", () => {
       setModalVisible={mockSetModalVisible}
     />
   )
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 })
 
 test("modal does not close when pressing info (no info)", () => {
@@ -177,7 +177,7 @@ test("modal does not close when pressing info (no info)", () => {
     />
   )
   
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 
   fireEvent.click(container.querySelector("#modal-info"))
   rerender(
@@ -188,5 +188,5 @@ test("modal does not close when pressing info (no info)", () => {
       setModalVisible={mockSetModalVisible}
     />
   )
-  expect(container.querySelector("#modal")).toHaveStyle("visibility: visible")
+  expect(container.querySelector("#modal")).toHaveStyle("opacity: 1")
 })

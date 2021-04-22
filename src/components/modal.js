@@ -29,35 +29,10 @@ function Modal(props) {
       w = clientW * 0.45
     }
     setPicWidth(w)
-    // let modalPicElem = document.getElementById("modal-pic")
-    // modalPicElem.style.width = w > clientW * 0.45 ? "45vw" : w + "px"
-
-    /* add event listener to modal window for user clicking off of image */
-    // var modalWindow = document.getElementById("modal")
-    // if (modalWindow) {
-    //   modalWindow.addEventListener("click", function (e) {
-    //     const modalPic = document.getElementById("modal-pic")
-    //     const modalInfoElem = document.getElementById("modal-info")
-    //     if (!modalPic.contains(e.target) && !modalInfoElem.contains(e.target)) {
-    //       closeModal()
-    //     }
-    //   })
-    // }
-  },[props.modalImage.node.originalAspect.aspectRatio])
-
-  function handleModalClick(e) {
-    const modalPic = document.getElementById("modal-pic")
-    const modalInfoElem = document.getElementById("modal-info")
-    if (!modalPic.contains(e.target) && !modalInfoElem.contains(e.target)) {
-      closeModal()
-    }
-  }
+  }, [props.modalImage.node.originalAspect.aspectRatio])
 
   function closeModal() {
     props.setModalVisible(false)
-    // const modalWindow = document.getElementById("modal")
-    // modalWindow.style.visibility = "hidden"
-    // modalWindow.style.opacity = "0"
   }
 
   /* Main modal element to create and return */
@@ -66,18 +41,18 @@ function Modal(props) {
     <div
       id="modal"
       style={{
-        visibility: props.modalVisible ? "visible" : "hidden",
         opacity: props.modalVisible ? "1" : "0",
-        transition: "opacity 0.4s linear",
+        pointerEvents: props.modalVisible ? "visible" : "none",
+        transition: "opacity 400ms linear",
         position: "fixed",
         top: "0",
         left: "0",
-        width: "100%",
-        height: "100%",
+        right: "0",
+        bottom: "0",
         backgroundColor: "rgba(43, 43, 43, 0.705)",
         zIndex: "99",
       }}
-      onClick={handleModalClick}
+      onClick={closeModal}
     >
       <button
         style={{
@@ -90,13 +65,14 @@ function Modal(props) {
           border: "white",
           cursor: "pointer",
         }}
-        onClick={() => closeModal()}
+        onClick={closeModal}
         data-testid="modal-close-button"
       >
         <Close style={{ width: "2.5rem", height: "2.5rem" }} />
       </button>
       <div
         id="modal-content"
+        onClick = {e => e.stopPropagation()}
         style={{
           display: "flex",
           position: "absolute",
@@ -106,7 +82,7 @@ function Modal(props) {
         }}
       >
         {/* Modal Image to be displayed */}
-        <div id="modal-pic" style={{width: picWidth + "px"}}>
+        <div id="modal-pic" style={{ width: picWidth + "px" }}>
           <Img fluid={props.modalImage.node.originalAspect} />
         </div>
         {/* Modal Information to be shown, relating to the image */}
