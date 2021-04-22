@@ -42,6 +42,7 @@ export const Layout = ({ children }) => {
     }
   `)
 
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     console.log("rendered")
