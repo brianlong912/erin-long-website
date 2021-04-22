@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState }  from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
@@ -12,6 +12,7 @@ export default function IndexPage({ data }) {
   const [modalImageId, setModalImageId] = useState(
     data.allImageSharp.edges[0].node.id
   )
+  const [modalVisible, setModalVisible] = useState(false)
 
   /* Find the correct image for the modal overlay of a selected iamge */
   const modalImage = data.allImageSharp.edges.find(e => {
@@ -26,27 +27,27 @@ export default function IndexPage({ data }) {
   })
 
   /* Update the size of the picture wrapper for fluid pic */
-  useEffect(() => {
-    let aspect = modalImage.node.originalAspect.aspectRatio
-    let clientW = document.documentElement.clientWidth
-    let clientH = document.documentElement.clientHeight
-    let w = aspect * clientH * 0.9
-    let modalPicElem = document.getElementById("modal-pic")
-    modalPicElem.style.width = w > clientW * 0.45 ? "45vw" : w + "px"
+  // useEffect(() => {
+  //   let aspect = modalImage.node.originalAspect.aspectRatio
+  //   let clientW = document.documentElement.clientWidth
+  //   let clientH = document.documentElement.clientHeight
+  //   let w = aspect * clientH * 0.9
+  //   let modalPicElem = document.getElementById("modal-pic")
+  //   modalPicElem.style.width = w > clientW * 0.45 ? "45vw" : w + "px"
 
-    /* add event listener to modal window for user clicking off of image */
-    var modalWindow = document.getElementById("modal")
-    if (modalWindow) {
-      modalWindow.addEventListener("click", function (e) {
-        const modalPic = document.getElementById("modal-pic")
-        const modalInfoElem = document.getElementById("modal-info")
-        if (!modalPic.contains(e.target) && !modalInfoElem.contains(e.target)) {
-          modalWindow.style.visibility = "hidden"
-          modalWindow.style.opacity = "0"
-        }
-      })
-    }
-  })
+  //   /* add event listener to modal window for user clicking off of image */
+  //   var modalWindow = document.getElementById("modal")
+  //   if (modalWindow) {
+  //     modalWindow.addEventListener("click", function (e) {
+  //       const modalPic = document.getElementById("modal-pic")
+  //       const modalInfoElem = document.getElementById("modal-info")
+  //       if (!modalPic.contains(e.target) && !modalInfoElem.contains(e.target)) {
+  //         modalWindow.style.visibility = "hidden"
+  //         modalWindow.style.opacity = "0"
+  //       }
+  //     })
+  //   }
+  // })
 
   /* Functions to incrase and decrease the size of the pictures on the screen */
   function increasePics() {
@@ -64,9 +65,10 @@ export default function IndexPage({ data }) {
 
   /* function to toggle modal and set image for modal */
   function showImage(id) {
-    var modalWindow = document.getElementById("modal")
-    modalWindow.style.visibility = "visible"
-    modalWindow.style.opacity = "1"
+    setModalVisible(true);
+    // var modalWindow = document.getElementById("modal")
+    // modalWindow.style.visibility = "visible"
+    // modalWindow.style.opacity = "1"
 
     setModalImageId(id)
   }
@@ -74,6 +76,7 @@ export default function IndexPage({ data }) {
   /*Creates an array of elements of all of the photos from the graphql query */
   const pics = data.allImageSharp.edges.map(edge => {
     const pic = edge.node.square
+    //custom image used for about page, don't want it on main page
     if (pic.originalName === "erin.jpg") {
       return null
     }
@@ -121,7 +124,7 @@ export default function IndexPage({ data }) {
         <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
 
         {/* Modal element for clicking on image */}
-        <Modal modalImage={modalImage} modalInfo={modalInfo} />
+        <Modal modalImage={modalImage} modalInfo={modalInfo} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
       </Layout>
   )
 }
