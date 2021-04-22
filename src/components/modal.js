@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
 import Img from "gatsby-image"
+import mojs from "@mojs/core"
 
 import { FaTimes as Close } from "react-icons/fa"
+import CloseButton from "./closeButton"
 
 function Modal(props) {
   const [picWidth, setPicWidth] = useState(0)
@@ -55,6 +57,7 @@ function Modal(props) {
       onClick={closeModal}
     >
       <button
+        id="close-button"
         style={{
           position: "absolute",
           right: "1.25em",
@@ -68,7 +71,8 @@ function Modal(props) {
         onClick={closeModal}
         data-testid="modal-close-button"
       >
-        <Close style={{ width: "2.5rem", height: "2.5rem" }} />
+        <CloseButton duration={500} />
+        {/* <Close style={{ width: "2.5rem", height: "2.5rem" }} /> */}
       </button>
       <div
         id="modal-content"

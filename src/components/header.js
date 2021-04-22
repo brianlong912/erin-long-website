@@ -11,8 +11,8 @@ function Header({ siteTitle }) {
 
   function handleScrollEvent() {
     let yPos = window.pageYOffset
-    let header = document.getElementById("header")
-    header.style.top = "-" + yPos / 10 + "px"
+    // let header = document.getElementById("header")
+    // header.style.top = "-" + yPos / 10 + "px"
     let eyeLidOpen = -75 + yPos / 4
     setEyelidHeight(eyeLidOpen < 75 ? eyeLidOpen : 75)
   }
@@ -79,6 +79,12 @@ function Header({ siteTitle }) {
         <clipPath id="eye-clip">
           <path d={`m 0 50 q 75 ${eyelidHeight} 150 0 q -75 75 -150 0`} />
         </clipPath>
+        <path
+          id="eye-lid"
+          d={`m 0 50 q 75 -75 150 0 q -75 75 -150 0`}
+          fill="#ffe4c7"
+          stroke="black"
+        />
         <path
           id="eye-lid"
           d={`m 0 50 q 75 ${eyelidHeight} 150 0 q -75 75 -150 0`}
