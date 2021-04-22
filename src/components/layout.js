@@ -13,7 +13,25 @@ import { FaArrowUp as ArrowUp } from "react-icons/fa"
 import Header from "./header"
 import "../styles/layout.css"
 
-const Layout = ({ children }) => {
+export const PureLayout = ({ children, data }) => {
+  return (
+    <>
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <div style={{}}>
+        <main>{children}</main>
+        <ScrollTopButton />
+        {/* <footer
+        style={{
+          marginTop: `2rem`,
+        }}
+      ></footer> */}
+      </div>
+    </>
+  )
+}
+
+export const Layout = ({ children }) => {
+  console.log("In Layout")
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -27,21 +45,11 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
+    console.log("rendered")
   })
 
   return (
-      <>
-        <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-        <div className="content">
-          <main>{children}</main>
-          <ScrollTopButton />
-          {/* <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        ></footer> */}
-        </div>
-      </>
+    <PureLayout children={children} data={data} />
   )
 }
 
@@ -50,12 +58,12 @@ Layout.propTypes = {
 }
 
 function ScrollTopButton() {
-  var yPos
+  const [yPos, setYPos] = useState(0)
   useEffect(() => {
-    yPos = window.pageYOffset
-  })
+    setYPos(window.pageYOffset)
+  }, [])
   function toTopFunction() {
-    window.scroll({top: "0", behavior: "smooth"})
+    window.scroll({ top: "0", behavior: "smooth" })
     // document.body.scrollTop = 0 //For Safari?
     // document.documentElement.scrollTop = 0 //for other browsers
   }
@@ -77,6 +85,7 @@ function ScrollTopButton() {
 }
 
 function handleScroll() {
+  console.log("scrolled")
   var yPos = window.pageYOffset
   var toTopButton = document.getElementById("toTopButton")
   if (yPos) {
