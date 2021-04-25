@@ -66,7 +66,9 @@ export default function IndexPage({ data }) {
   /* function to toggle modal and set image for modal */
   function showImage(id) {
     setModalVisible(true);
-    setModalImageId(id)
+    setModalImageId(id);
+    let modal = document.getElementById("modal")
+    modal.focus();
   }
 
   /*Creates an array of elements of all of the photos from the graphql query */

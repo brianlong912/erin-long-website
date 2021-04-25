@@ -33,7 +33,8 @@ function Modal(props) {
     setPicWidth(w)
   }, [props.modalImage.node.originalAspect.aspectRatio])
 
-  function closeModal() {
+  function closeModal(e) {
+    if(e.type=="keydown" && e.key!="Escape") return
     props.setModalVisible(false)
   }
 
@@ -55,6 +56,8 @@ function Modal(props) {
         zIndex: "99",
       }}
       onClick={closeModal}
+      onKeyDown={closeModal}
+      tabIndex="0"
     >
       <button
         id="close-button"
@@ -63,20 +66,18 @@ function Modal(props) {
           right: "2rem",
           top: "2rem",
           background: "transparent",
-          borderRadius: "50%",
-          color: "inherit",
-          border: "white",
+          border: "none",
           cursor: "pointer",
         }}
         onClick={closeModal}
         data-testid="modal-close-button"
       >
-        <CloseButton duration={500} visible={props.modalVisible}/>
+        <CloseButton duration={500} visible={props.modalVisible} />
         {/* <Close style={{ width: "2.5rem", height: "2.5rem" }} /> */}
       </button>
       <div
         id="modal-content"
-        onClick = {e => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
         style={{
           display: "flex",
           position: "absolute",

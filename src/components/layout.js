@@ -59,7 +59,7 @@ function ScrollTopButton() {
   
   function handleScroll() {
     var yPos = window.pageYOffset
-    if (yPos) {
+    if (yPos>700) {
       setShowTopButton(true)
     } else {
       setShowTopButton(false)
