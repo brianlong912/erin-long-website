@@ -66,10 +66,6 @@ export default function IndexPage({ data }) {
   /* function to toggle modal and set image for modal */
   function showImage(id) {
     setModalVisible(true);
-    // var modalWindow = document.getElementById("modal")
-    // modalWindow.style.visibility = "visible"
-    // modalWindow.style.opacity = "1"
-
     setModalImageId(id)
   }
 
@@ -82,7 +78,7 @@ export default function IndexPage({ data }) {
     }
     return (
       <button
-        key={edge.id}
+        key={edge.node.id}
         className="pic-wrapper"
         style={{ width: picWidth + "%" }}
         onClick={() => showImage(edge.node.id)}

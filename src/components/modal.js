@@ -60,8 +60,8 @@ function Modal(props) {
         id="close-button"
         style={{
           position: "absolute",
-          right: "1.25em",
-          top: "1.25em",
+          right: "2rem",
+          top: "2rem",
           background: "transparent",
           borderRadius: "50%",
           color: "inherit",
@@ -71,7 +71,7 @@ function Modal(props) {
         onClick={closeModal}
         data-testid="modal-close-button"
       >
-        <CloseButton duration={500} />
+        <CloseButton duration={500} visible={props.modalVisible}/>
         {/* <Close style={{ width: "2.5rem", height: "2.5rem" }} /> */}
       </button>
       <div

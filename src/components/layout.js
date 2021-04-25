@@ -31,7 +31,6 @@ export const PureLayout = ({ children, data }) => {
 }
 
 export const Layout = ({ children }) => {
-  console.log("In Layout")
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -42,15 +41,7 @@ export const Layout = ({ children }) => {
     }
   `)
 
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
-    console.log("rendered")
-  })
-
-  return (
-    <PureLayout children={children} data={data} />
-  )
+  return <PureLayout children={children} data={data} />
 }
 
 Layout.propTypes = {
@@ -58,14 +49,25 @@ Layout.propTypes = {
 }
 
 function ScrollTopButton() {
-  const [yPos, setYPos] = useState(0)
+  const [showTopButton, setShowTopButton] = useState(false)
   useEffect(() => {
-    setYPos(window.pageYOffset)
-  }, [])
+    window.addEventListener("scroll", handleScroll)
+    return function cleanup(){
+      window.removeEventListener("scroll", handleScroll)
+    }
+  })
+  
+  function handleScroll() {
+    var yPos = window.pageYOffset
+    if (yPos) {
+      setShowTopButton(true)
+    } else {
+      setShowTopButton(false)
+    }
+  }
+
   function toTopFunction() {
     window.scroll({ top: "0", behavior: "smooth" })
-    // document.body.scrollTop = 0 //For Safari?
-    // document.documentElement.scrollTop = 0 //for other browsers
   }
 
   return (
@@ -74,27 +76,15 @@ function ScrollTopButton() {
       className="toTopButton"
       onClick={() => toTopFunction()}
       style={{
-        opacity: yPos ? "1" : "0",
-        visibility: yPos ? "visible" : "hidden",
+        opacity: showTopButton ? "1" : "0",
+        pointerEvents: showTopButton ? "visible" : "hidden",
         cursor: "pointer",
+        transition: "opacity 400ms",
       }}
     >
       <ArrowUp style={{ width: "50px", height: "50px" }} />
     </button>
   )
-}
-
-function handleScroll() {
-  console.log("scrolled")
-  var yPos = window.pageYOffset
-  var toTopButton = document.getElementById("toTopButton")
-  if (yPos) {
-    toTopButton.style.opacity = "1"
-    toTopButton.style.visibility = "visible"
-  } else {
-    toTopButton.style.opacity = "0"
-    toTopButton.style.visibility = "hidden"
-  }
 }
 
 export default Layout

@@ -4,6 +4,7 @@
   margin: 0 1.8em;
 }
 
-.pageLink:hover {
+.pageLink:hover,
+.pageLink:focus {
   border-bottom: solid white 2px;
 }

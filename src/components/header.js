@@ -7,6 +7,9 @@ function Header({ siteTitle }) {
   const [eyelidHeight, setEyelidHeight] = useState(-75)
   useEffect(() => {
     window.addEventListener("scroll", handleScrollEvent)
+    return function cleanup(){
+      window.removeEventListener("scroll", handleScrollEvent)
+    }
   })
 
   function handleScrollEvent() {
