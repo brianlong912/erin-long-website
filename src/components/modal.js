@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Img from "gatsby-image"
-import mojs from "@mojs/core"
 
-import { FaTimes as Close } from "react-icons/fa"
 import CloseButton from "./closeButton"
 
 function Modal(props) {
@@ -34,15 +32,15 @@ function Modal(props) {
   }, [props.modalImage.node.originalAspect.aspectRatio])
 
   function closeModal(e) {
-    if(e.type=="keydown" && e.key!="Escape") return
+    if (e.type === "keydown" && e.key !== "Escape") return
     props.setModalVisible(false)
   }
 
   /* Main modal element to create and return */
   return (
-    /* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events*/
     <div
       id="modal"
+      role="button"
       style={{
         opacity: props.modalVisible ? "1" : "0",
         pointerEvents: props.modalVisible ? "visible" : "none",
@@ -73,8 +71,8 @@ function Modal(props) {
         data-testid="modal-close-button"
       >
         <CloseButton duration={500} visible={props.modalVisible} />
-        {/* <Close style={{ width: "2.5rem", height: "2.5rem" }} /> */}
       </button>
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events*/}
       <div
         id="modal-content"
         onClick={e => e.stopPropagation()}
