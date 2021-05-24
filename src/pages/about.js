@@ -16,12 +16,13 @@ export default function About({ data }) {
     <Layout>
       <SEO title="About" />
       <div
-        style={{
-          display: "flex",
-          margin: "auto",
-          width: "1000px",
-          paddingTop: "20vh",
-        }}
+        className="about-content"
+        // style={{
+        //   display: "flex",
+        //   margin: "auto",
+        //   width: "1000px",
+        //   paddingTop: "20vh",
+        // }}
       >
         <div id="about-image">
           <Img fluid={data.imageSharp.fluid} />

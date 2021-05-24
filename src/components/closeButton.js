@@ -48,7 +48,7 @@ const CloseButton = ({ duration, visible }) => {
     
     visible ? close.current.play() : close.current.playBackward()
     if (visible) cir.current.play()
-  })
+  },[visible])
 
   return <div ref={animDom} />
 }

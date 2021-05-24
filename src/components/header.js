@@ -26,20 +26,18 @@ function Header({ siteTitle }) {
       id="header"
       style={{
         background: "#191919",
-        position: "fixed",
+        // position: "fixed",
         width: "100%",
-        height: "80px",
-        zIndex: "99",
       }}
     >
       <div
         style={{
           display: "flex",
-          margin: `0 auto`,
-          padding: `1.2rem 1.1rem`,
+          padding: "1.2rem 1.1rem",
+          justifyContent: "space-between",
         }}
       >
-        <div style={{ width: "50%" }}>
+        <div style={{ flex: "1 4" }}>
           <Link
             data-testid="title"
             to="/"
@@ -56,9 +54,8 @@ function Header({ siteTitle }) {
         <div
           style={{
             display: "flex",
+            flex: "1 0",
             justifyContent: "flex-end",
-            height: "1.5em",
-            width: "50%",
           }}
         >
           <MyLink to="/">Photos</MyLink>
@@ -76,7 +73,7 @@ function Header({ siteTitle }) {
         />
         <path id="line" d="m 18.567752,45 c 10,0 30,-1 70,0" fill="none" stroke="black"/>
       </svg> */}
-      <svg
+      {/* <svg
         style={{
           position: "absolute",
           left: "50%",
@@ -109,7 +106,7 @@ function Header({ siteTitle }) {
           fill="#3a4289"
         />
         <circle id="pupil" clipPath="url(#eye-clip)" r="22" cx="75" cy="50" />
-      </svg>
+      </svg> */}
     </header>
   )
 }

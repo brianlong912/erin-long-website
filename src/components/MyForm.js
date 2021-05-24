@@ -19,15 +19,17 @@ export default class MyForm extends React.Component {
     return (
       <div
         id="form-wrapper"
-        style={{ width: "800px", margin: "auto", padding: "3em 0" }}
+        style={{ maxWidth: "800px", margin: "3rem auto" }}
       >
         <form
           onSubmit={this.submitForm}
           action="https://formspree.io/p/1625993179712978125/f/contactForm"
           method="POST"
-          style={{ display: status==="SUCCESS" ? "none" : "block" }}
+          style={{ display: status === "SUCCESS" ? "none" : "block" }}
         >
-          <div style={{margin: "1em 2em", fontSize: ".9em"}}>Send me a message and I will get back to you as soon as possible</div>
+          <div style={{ margin: "1em 2em", fontSize: ".9em" }}>
+            Send me a message and I will get back to you as soon as possible
+          </div>
           <div className="form-small-elements">
             <div className="form-small">
               <label htmlFor="name">Name</label>
@@ -57,7 +59,7 @@ export default class MyForm extends React.Component {
           style={{
             display: status !== "SUCCESS" ? "none" : "block",
             textAlign: "center",
-            fontSize: "1.5em"
+            fontSize: "1.5em",
           }}
         >
           Thank you for reaching out!

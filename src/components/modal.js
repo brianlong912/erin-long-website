@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react"
 import Img from "gatsby-image"
 
 import CloseButton from "./closeButton"
+import "../styles/modal.css"
 
 function Modal(props) {
   const [picWidth, setPicWidth] = useState(0)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
   /* Conditionally render the Image Info with the modal */
   let info
   if (props.modalInfo) {
@@ -29,8 +32,25 @@ function Modal(props) {
       w = clientW * 0.45
     }
     setPicWidth(w)
-  }, [props.modalImage.node.originalAspect.aspectRatio])
+  }, [
+    props.modalImage.node.originalAspect.aspectRatio,
+    props.modalVisible,
+    screenWidth,
+  ])
 
+  /* Watch for screen resizing to trigger useEffect above and change pic size */
+  useEffect(() => {
+    function handleResize() {
+      setScreenWidth(window.innerWidth)
+    }
+    window.addEventListener("resize", handleResize)
+
+    return function cleanup() {
+      window.removeEventListener("resize", handleResize)
+    }
+  })
+
+  /* Function to handle closing the modal */
   function closeModal(e) {
     if (e.type === "keydown" && e.key !== "Escape") return
     props.setModalVisible(false)
@@ -50,7 +70,7 @@ function Modal(props) {
         left: "0",
         right: "0",
         bottom: "0",
-        backgroundColor: "rgba(43, 43, 43, 0.705)",
+        backgroundColor: "rgba(43, 43, 43, 0.8)",
         zIndex: "99",
       }}
       onClick={closeModal}
@@ -76,16 +96,12 @@ function Modal(props) {
       <div
         id="modal-content"
         onClick={e => e.stopPropagation()}
-        style={{
-          display: "flex",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%,-50%)",
-        }}
       >
         {/* Modal Image to be displayed */}
-        <div id="modal-pic" style={{ width: picWidth + "px" }}>
+        <div
+          id="modal-pic"
+          style={{ width: picWidth + "px", flex: "0 0 " + picWidth + "px" }}
+        >
           <Img fluid={props.modalImage.node.originalAspect} />
         </div>
         {/* Modal Information to be shown, relating to the image */}
@@ -93,10 +109,6 @@ function Modal(props) {
           id="modal-info"
           style={{
             display: info ? "block" : "none",
-            width: "18em",
-            backgroundColor: "#2f2f2f",
-            padding: "20px",
-            boxSizing: "border-box",
           }}
         >
           {info}
