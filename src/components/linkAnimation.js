@@ -40,8 +40,6 @@ const LinkAnimation = ({ hover }) => {
       easing: "ease.inout",
     })
 
-    console.log(cir)
-
     const line = new mojs.Shape({
       ...opts,
       shape: "linkLine",
@@ -87,15 +85,6 @@ const LinkAnimation = ({ hover }) => {
     if(isAnimating) return
     timeline.current.replay()
   }, [hover])
-
-  // function mouseEnter() {
-  //   cir.current.play()
-  //   console.log("entered")
-  // }
-
-  // function mouseLeave() {
-  //   cir.current.playBackward()
-  // }
 
   return <div ref={animDom} />
 }

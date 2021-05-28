@@ -1,4 +1,4 @@
-import React, { useState }  from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
@@ -42,10 +42,10 @@ export default function IndexPage({ data }) {
 
   /* function to toggle modal and set image for modal */
   function showImage(id) {
-    setModalVisible(true);
-    setModalImageId(id);
+    setModalVisible(true)
+    setModalImageId(id)
     let modal = document.getElementById("modal")
-    modal.focus();
+    modal.focus()
   }
 
   /*Creates an array of elements of all of the photos from the graphql query */
@@ -58,7 +58,7 @@ export default function IndexPage({ data }) {
     return (
       <button
         key={edge.node.id}
-        className="pic-wrapper"
+        className="pic-wrapper fade-in"
         style={{ width: picWidth + "%" }}
         onClick={() => showImage(edge.node.id)}
       >
@@ -71,36 +71,61 @@ export default function IndexPage({ data }) {
     )
   })
 
+  useEffect(() => {
+    const fadingImages = document.querySelectorAll(".fade-in")
+    const appearOptions = {}
+    const appearOnScroll = new IntersectionObserver(function (
+      entries,
+      appearOnScroll
+    ) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return
+        entry.target.classList.add("appear")
+        appearOnScroll.unobserve(entry.target)
+      })
+    },
+    appearOptions)
+
+    fadingImages.forEach(image => {
+      appearOnScroll.observe(image)
+    })
+  })
+
   return (
-      <Layout>
-        <SEO title="Photos" />
+    <Layout>
+      <SEO title="Photos" />
 
-        {/* Buttons on the bottom left to increase and decrease the image sizes */}
-        <div
-          style={{
-            position: "fixed",
-            left: "30px",
-            bottom: "30px",
-            zIndex: "98",
-            display: "flex",
-            flexDirection: "column",
-            width: "32px",
-          }}
-        >
-          <button className="inc-dec-button" onClick={() => increasePics()}>
-            <div className="inc-dec-text">+</div>
-          </button>
-          <button className="inc-dec-button" onClick={() => decreasePics()}>
-            <div className="inc-dec-text">-</div>
-          </button>
-        </div>
+      {/* Buttons on the bottom left to increase and decrease the image sizes */}
+      <div
+        style={{
+          position: "fixed",
+          left: "30px",
+          bottom: "30px",
+          zIndex: "98",
+          display: "flex",
+          flexDirection: "column",
+          width: "32px",
+        }}
+      >
+        <button className="inc-dec-button" onClick={() => increasePics()}>
+          <div className="inc-dec-text">+</div>
+        </button>
+        <button className="inc-dec-button" onClick={() => decreasePics()}>
+          <div className="inc-dec-text">-</div>
+        </button>
+      </div>
 
-        {/* All images shown here */}
-        <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
+      {/* All images shown here */}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>{pics}</div>
 
-        {/* Modal element for clicking on image */}
-        <Modal modalImage={modalImage} modalInfo={modalInfo} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
-      </Layout>
+      {/* Modal element for clicking on image */}
+      <Modal
+        modalImage={modalImage}
+        modalInfo={modalInfo}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
+    </Layout>
   )
 }
 
