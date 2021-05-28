@@ -26,29 +26,6 @@ export default function IndexPage({ data }) {
     )
   })
 
-  /* Update the size of the picture wrapper for fluid pic */
-  // useEffect(() => {
-  //   let aspect = modalImage.node.originalAspect.aspectRatio
-  //   let clientW = document.documentElement.clientWidth
-  //   let clientH = document.documentElement.clientHeight
-  //   let w = aspect * clientH * 0.9
-  //   let modalPicElem = document.getElementById("modal-pic")
-  //   modalPicElem.style.width = w > clientW * 0.45 ? "45vw" : w + "px"
-
-  //   /* add event listener to modal window for user clicking off of image */
-  //   var modalWindow = document.getElementById("modal")
-  //   if (modalWindow) {
-  //     modalWindow.addEventListener("click", function (e) {
-  //       const modalPic = document.getElementById("modal-pic")
-  //       const modalInfoElem = document.getElementById("modal-info")
-  //       if (!modalPic.contains(e.target) && !modalInfoElem.contains(e.target)) {
-  //         modalWindow.style.visibility = "hidden"
-  //         modalWindow.style.opacity = "0"
-  //       }
-  //     })
-  //   }
-  // })
-
   /* Functions to incrase and decrease the size of the pictures on the screen */
   function increasePics() {
     if (numPicsWide > 3) {

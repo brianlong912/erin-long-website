@@ -18,7 +18,7 @@
 
 #modal-info{
   flex: 0 0 40%;
-  background-color: #2f2f2f;
+  background-color: var(--bg-dark);
   padding: 20px;
   box-sizing: border-box;
 }

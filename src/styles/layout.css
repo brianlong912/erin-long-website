@@ -10,7 +10,7 @@
   height: 70px;
   width: 70px;
   border: solid 4px;
-  background-color: rgba(70,70,70,0.6);
+  background-color: rgba(0,0,0,0.3);
   color: white;
   transition: opacity 400ms;
 }
