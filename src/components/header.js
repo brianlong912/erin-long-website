@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useEffect, useState } from "react"
+import React from "react"
 
 import "../styles/header.css"
 import MyLink from "./myLink"
@@ -31,7 +31,6 @@ function Header({ siteTitle }) {
               textDecoration: `none`,
               fontSize: "2.5rem",
             }}
-            tabIndex="1"
           >
             {siteTitle}
           </Link>
