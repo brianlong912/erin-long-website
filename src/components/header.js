@@ -1,54 +1,56 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import "../styles/header.css"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: "#191919",
-    }}
-  >
-    <div
+import "../styles/header.css"
+import MyLink from "./myLink"
+
+function Header({ siteTitle }) {
+  return (
+    <header
+      id="header"
       style={{
-        display: "flex",
-        margin: `0 auto`,
-        padding: `1.2rem 1.1rem`,
+        background: "#191919",
+        // position: "fixed",
+        width: "100%",
       }}
     >
-      <div style={{ width: "50%" }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-            fontSize: "2.5rem",
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </div>
       <div
         style={{
           display: "flex",
-          justifyContent: "right",
-          height: "1.5em",
-          width: "50%",
+          padding: "1.2rem 1.1rem",
+          justifyContent: "space-between",
         }}
       >
-        <Link to="/" className="pageLink">
-          Photos
-        </Link>
-        <Link to="/about" className="pageLink">
-          About
-        </Link>
-        <Link to="/contact" className="pageLink">
-          Contact
-        </Link>
+        <div style={{ flex: "1 4" }}>
+          <Link
+            data-testid="title"
+            to="/"
+            style={{
+              color: `white`,
+              textDecoration: `none`,
+              fontSize: "2.5rem",
+            }}
+          >
+            {siteTitle}
+          </Link>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flex: "1 0",
+            justifyContent: "flex-end",
+          }}
+        >
+          <MyLink to="/">Photos</MyLink>
+          <MyLink to="/about">About</MyLink>
+          <MyLink to="/contact">Contact</MyLink>
+        </div>
       </div>
-    </div>
-  </header>
-)
+    </header>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

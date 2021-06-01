@@ -1,3 +1,8 @@
+:root {
+  --bg-dark: #191919;
+  --bg-light: #393939;
+}
+
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -7,7 +12,7 @@ html {
 }
 body {
   margin: 0;
-  background: #393939;
+  background: var(--bg-light);
   overflow: hidden;
   color: white;
   -webkit-font-smoothing: antialiased;

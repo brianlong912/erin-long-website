@@ -1,9 +1,7 @@
 .pageLink {
+  box-sizing: border-box;
+  position: relative;
   color: white;
   text-decoration: none;
-  margin: 0 1.8em;
-}
-
-.pageLink:hover {
-  border-bottom: solid white 2px;
+  margin: auto 4%;
 }
