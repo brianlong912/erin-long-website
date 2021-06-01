@@ -8,6 +8,7 @@ import SEO from "../components/seo"
 import "../styles/about.css"
 
 export default function About({ data }) {
+  /* only use the info for the about page, so the node that has a name is used (imageInfo has title, size, and description) */
   const aboutInfo = data.allInfo.edges.find(e => {
     return e.node.name
   })
@@ -17,14 +18,9 @@ export default function About({ data }) {
       <SEO title="About" />
       <div
         className="about-content"
-        // style={{
-        //   display: "flex",
-        //   margin: "auto",
-        //   width: "1000px",
-        //   paddingTop: "20vh",
-        // }}
       >
         <div id="about-image">
+          {/* Custom image, queried with exact name in graphql below */}
           <Img fluid={data.imageSharp.fluid} />
         </div>
         <div id="about-info">
@@ -41,7 +37,6 @@ export const query = graphql`
       edges {
         node {
           name
-          email
           description
         }
       }

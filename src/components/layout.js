@@ -13,6 +13,7 @@ import { FaArrowUp as ArrowUp } from "react-icons/fa"
 import Header from "./header"
 import "../styles/layout.css"
 
+/* Create a purelayout for testing perposes, not dependent on static query */
 export const PureLayout = ({ children, data }) => {
   return (
     <>
@@ -48,8 +49,11 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
+/* Layout button for scrolling back to the top */
 function ScrollTopButton() {
   const [showTopButton, setShowTopButton] = useState(false)
+
+  /* add event listener to window for scrolling */
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     return function cleanup(){
@@ -57,6 +61,7 @@ function ScrollTopButton() {
     }
   })
   
+  /* scroll funciton to either show or hide the toTopButton based on scroll distance */
   function handleScroll() {
     var yPos = window.pageYOffset
     if (yPos>700) {
@@ -66,6 +71,7 @@ function ScrollTopButton() {
     }
   }
 
+  /* callback for scrollTopButton to return to the top */
   function toTopFunction() {
     window.scroll({ top: "0", behavior: "smooth" })
   }

@@ -1,7 +1,3 @@
-// Customize this 'myform.js' script and add it to your JS bundle.
-// Then import it with 'import MyForm from "./myform.js"'.
-// Finally, add a <MyForm/> element whereever you wish to display the form.
-
 import React from "react"
 import "../styles/MyForm.css"
 
@@ -30,6 +26,7 @@ export default class MyForm extends React.Component {
           <div style={{ margin: "1em 2em", fontSize: ".9em" }}>
             Send me a message and I will get back to you as soon as possible
           </div>
+          {/* Name and email elements for form */}
           <div className="form-small-elements">
             <div className="form-small">
               <label htmlFor="name">Name</label>
@@ -45,6 +42,8 @@ export default class MyForm extends React.Component {
               />
             </div>
           </div>
+
+          {/* Message box of form */}
           <div className="form-large">
             <label htmlFor="message">Message</label>
             <textarea
@@ -55,6 +54,8 @@ export default class MyForm extends React.Component {
           </div>
           <button className="form-submit">Submit</button>
         </form>
+
+        {/* Display message that replaces form on successful submit */}
         <div
           style={{
             display: status !== "SUCCESS" ? "none" : "block",
@@ -68,6 +69,7 @@ export default class MyForm extends React.Component {
     )
   }
 
+  /* Create http request to formspree to then be emailed  */
   submitForm(ev) {
     ev.preventDefault()
     const form = ev.target

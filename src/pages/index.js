@@ -8,25 +8,27 @@ import Modal from "../components/modal"
 import "../styles/index.css"
 
 export default function IndexPage({ data }) {
+  /* State variables, mostly for the modal image */
   const [numPicsWide, setNumPicsWide] = useState(3)
   const [modalImageId, setModalImageId] = useState(
     data.allImageSharp.edges[0].node.id
   )
+  const [modalImage, setModalImage] = useState(
+    data.allImageSharp.edges.find(e => {
+      return e.node.id === modalImageId
+    })
+  )
+  const [modalInfo, setModalInfo] = useState(
+    data.allInfo.edges.find(e => {
+      return (
+        e.node.parent.relativeDirectory ===
+        modalImage.node.parent.relativeDirectory
+      )
+    })
+  )
   const [modalVisible, setModalVisible] = useState(false)
 
-  /* Find the correct image for the modal overlay of a selected iamge */
-  const modalImage = data.allImageSharp.edges.find(e => {
-    return e.node.id === modalImageId
-  })
-
-  const modalInfo = data.allInfo.edges.find(e => {
-    return (
-      e.node.parent.relativeDirectory ===
-      modalImage.node.parent.relativeDirectory
-    )
-  })
-
-  /* Functions to incrase and decrease the size of the pictures on the screen */
+  /* Functions to increase and decrease the size of the pictures on the screen */
   function increasePics() {
     if (numPicsWide > 3) {
       setNumPicsWide(numPicsWide - 2)
@@ -40,7 +42,24 @@ export default function IndexPage({ data }) {
 
   let picWidth = 100 / numPicsWide
 
-  /* function to toggle modal and set image for modal */
+  /* change the modal image and info whenever the modalImageId is changed */
+  useEffect(() => {
+    setModalImage(
+      data.allImageSharp.edges.find(e => {
+        return e.node.id === modalImageId
+      })
+    )
+    setModalInfo(
+      data.allInfo.edges.find(e => {
+        return (
+          e.node.parent.relativeDirectory ===
+          modalImage.node.parent.relativeDirectory
+        )
+      })
+    )
+  }, [modalImageId, modalImage, data.allImageSharp.edges, data.allInfo.edges])
+
+  /* click callback function to toggle modal and set image for modal */
   function showImage(id) {
     setModalVisible(true)
     setModalImageId(id)
@@ -65,15 +84,17 @@ export default function IndexPage({ data }) {
         <Img
           fluid={pic}
           className={numPicsWide === 1 ? "pic-full" : "pic"}
-          imgStyle={{ transition: "transform .5s", objectPosition: "center" }}
         />
       </button>
     )
   })
 
+  /* Intersection observer to fade and grow in images as scrolling down */
   useEffect(() => {
+    /* Observe all elements with the fade-in class, give them the appear class on intersection */
     const fadingImages = document.querySelectorAll(".fade-in")
-    const appearOptions = {}
+    const appearOptions = {threshold: 0.25}
+    /* setting up intersection observer */
     const appearOnScroll = new IntersectionObserver(function (
       entries,
       appearOnScroll
@@ -86,6 +107,7 @@ export default function IndexPage({ data }) {
     },
     appearOptions)
 
+    /* attach intersection observer to images */
     fadingImages.forEach(image => {
       appearOnScroll.observe(image)
     })
