@@ -6,7 +6,7 @@ import "../styles/modal.css"
 
 function Modal(props) {
   const [picWidth, setPicWidth] = useState(0)
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [screenWidth, setScreenWidth] = useState()
   const [closeFocus, setCloseFocus] = useState(false);
 
   /* Conditionally render the Image Info with the modal */

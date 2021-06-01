@@ -96,26 +96,28 @@ const LinkAnimation = ({ hover }) => {
   return <div ref={animDom} />
 }
 
-/* Custom circle drawing to look more hand drawn around link */
-class LinkCircle extends mojs.CustomShape {
-  getShape() {
-    return '<path d="M 40,4 C 12,5 -0.34399266,7.7616201 0,28.219159 0.51526392,43.547005 32.812962,49.553439 55.163208,49.845686 77.513449,50.137943 99.568965,47.506795 99.863684,26.465657 100.10929,8.9306292 81.197555,3.0856164 58.356097,3.3778631 35.514639,3.670121 4,7 3.0945058,20 2,41.078172 18.567752,43 18.567752,43"/>'
+if (mojs.CustomShape) {
+  /* Custom circle drawing to look more hand drawn around link */
+  class LinkCircle extends mojs.CustomShape {
+    getShape() {
+      return '<path d="M 40,4 C 12,5 -0.34399266,7.7616201 0,28.219159 0.51526392,43.547005 32.812962,49.553439 55.163208,49.845686 77.513449,50.137943 99.568965,47.506795 99.863684,26.465657 100.10929,8.9306292 81.197555,3.0856164 58.356097,3.3778631 35.514639,3.670121 4,7 3.0945058,20 2,41.078172 18.567752,43 18.567752,43"/>'
+    }
+    getLength() {
+      return 337.18
+    }
   }
-  getLength() {
-    return 337.18
-  }
-}
-mojs.addShape("customCircle", LinkCircle)
+  mojs.addShape("customCircle", LinkCircle)
 
-/* Custom Linke animation for hand drawn look */
-class LinkLine extends mojs.CustomShape {
-  getShape() {
-    return '<path d="m 18.567752,43 c 15,2 30,-1 70,0"/>'
+  /* Custom Linke animation for hand drawn look */
+  class LinkLine extends mojs.CustomShape {
+    getShape() {
+      return '<path d="m 18.567752,43 c 15,2 30,-1 70,0"/>'
+    }
+    getLength() {
+      return 70.59
+    }
   }
-  getLength() {
-    return 70.59
-  }
+  mojs.addShape("linkLine", LinkLine)
 }
-mojs.addShape("linkLine", LinkLine)
 
 export default LinkAnimation
