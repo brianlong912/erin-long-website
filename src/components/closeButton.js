@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react"
 import mojs from "@mojs/core"
 
-const CloseButton = ({ duration, visible }) => {
+const CloseButton = ({ duration, visible, focus }) => {
   const animDom = useRef()
   const close = useRef()
   const cir = useRef()
@@ -12,7 +12,7 @@ const CloseButton = ({ duration, visible }) => {
     close.current = new mojs.Shape({
       parent: animDom.current,
       shape: "cross",
-      stroke: "white",
+      stroke: focus?"blue":"white",
       strokeWidth: 7,
       radius: 15,
       isShowStart: true,
@@ -36,19 +36,28 @@ const CloseButton = ({ duration, visible }) => {
       duration: duration,
       scale: { 0: 1 },
       opacity: { 1: 0 },
-      ease: 'quad.out'
+      ease: "quad.out",
     })
   })
 
   useEffect(() => {
     if (!close.current || !cir.current) return
-
-    close.current.tune({duration: duration})
-    cir.current.tune({duration: duration})
-    
+    close.current.tune({stroke: "white"})
     visible ? close.current.play() : close.current.playBackward()
     if (visible) cir.current.play()
-  },[visible])
+  }, [visible])
+
+  useEffect(()=>{
+    if (focus) {
+      close.current.tune({stroke: "grey"})
+      close.current.play()
+      cir.current.play()
+    }else {
+      close.current.tune({stroke: "white"})
+      close.current.play()
+      cir.current.play()
+    }
+  },[focus])
 
   return <div ref={animDom} />
 }

@@ -7,6 +7,7 @@ import "../styles/modal.css"
 function Modal(props) {
   const [picWidth, setPicWidth] = useState(0)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [closeFocus, setCloseFocus] = useState(false);
 
   /* Conditionally render the Image Info with the modal */
   let info
@@ -52,7 +53,7 @@ function Modal(props) {
 
   /* Function to handle closing the modal */
   function closeModal(e) {
-    if (e.type === "keydown" && e.key !== "Escape") return
+    if (e.type === "keydown" && !(e.key === "Escape" || e.key === "Enter")) return
     props.setModalVisible(false)
   }
 
@@ -75,7 +76,7 @@ function Modal(props) {
       }}
       onClick={closeModal}
       onKeyDown={closeModal}
-      tabIndex="0"
+      tabIndex="-1"
     >
       <button
         id="close-button"
@@ -88,9 +89,11 @@ function Modal(props) {
           cursor: "pointer",
         }}
         onClick={closeModal}
+        onFocus={()=>{setCloseFocus(true)}}
+        onBlur={()=>{setCloseFocus(false)}}
         data-testid="modal-close-button"
       >
-        <CloseButton duration={500} visible={props.modalVisible} />
+        <CloseButton duration={500} visible={props.modalVisible} focus={closeFocus} />
       </button>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events*/}
       <div
