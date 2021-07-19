@@ -1,6 +1,6 @@
 ---
-title: Butterflies
-media: Oil on Canvas
-description: butterflies flying free
-image: "./IMG_0343.JPG"
+title: Steph
+media: Who knows
+description: So carefree
+image: ./IMG_0343.JPG
 ---
