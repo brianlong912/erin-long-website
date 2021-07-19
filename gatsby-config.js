@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: `Erin Long`,
     description: `Erin Long Photography.`,
-    author: `@gatsbyjs`,
+    author: `Brian Long`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -22,6 +22,14 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages`,
+        path: `${__dirname}/src/images`
+      }
+    },
+    `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     // {

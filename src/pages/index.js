@@ -10,22 +10,7 @@ import "../styles/index.css"
 export default function IndexPage({ data }) {
   /* State variables, mostly for the modal image */
   const [numPicsWide, setNumPicsWide] = useState(3)
-  const [modalImageId, setModalImageId] = useState(
-    data.allImageSharp.edges[0].node.id
-  )
-  const [modalImage, setModalImage] = useState(
-    data.allImageSharp.edges.find(e => {
-      return e.node.id === modalImageId
-    })
-  )
-  const [modalInfo, setModalInfo] = useState(
-    data.allInfo.edges.find(e => {
-      return (
-        e.node.parent.relativeDirectory ===
-        modalImage.node.parent.relativeDirectory
-      )
-    })
-  )
+  const [modalMarkdown, setModalMarkdown] = useState(data.allMarkdownRemark.edges[0].node)
   const [modalVisible, setModalVisible] = useState(false)
 
   /* Functions to increase and decrease the size of the pictures on the screen */
@@ -42,49 +27,27 @@ export default function IndexPage({ data }) {
 
   let picWidth = 100 / numPicsWide
 
-  /* change the modal image and info whenever the modalImageId is changed */
-  useEffect(() => {
-    setModalImage(
-      data.allImageSharp.edges.find(e => {
-        return e.node.id === modalImageId
-      })
-    )
-    setModalInfo(
-      data.allInfo.edges.find(e => {
-        return (
-          e.node.parent.relativeDirectory ===
-          modalImage.node.parent.relativeDirectory
-        )
-      })
-    )
-  }, [modalImageId, modalImage, data.allImageSharp.edges, data.allInfo.edges])
-
   /* click callback function to toggle modal and set image for modal */
-  function showImage(id) {
+  function showImage(markdown) {
+    setModalMarkdown(markdown)
     setModalVisible(true)
-    setModalImageId(id)
     let modal = document.getElementById("modal")
     modal.focus()
   }
 
   /*Creates an array of elements of all of the photos from the graphql query */
-  const pics = data.allImageSharp.edges.map(edge => {
-    const pic = edge.node.square
-    //custom image used for about page, don't want it on main page
-    if (pic.originalName === "erin.jpg") {
-      return null
-    }
+  const pics = data.allMarkdownRemark.edges.map(edge => {
+    if (edge.node.frontmatter.title === "About") return null
+    const pic = edge.node.frontmatter.image.childImageSharp.square
+
     return (
       <button
-        key={edge.node.id}
+        key={edge.node.frontmatter.title}
         className="pic-wrapper fade-in"
         style={{ width: picWidth + "%" }}
-        onClick={() => showImage(edge.node.id)}
+        onClick={() => showImage(edge.node)}
       >
-        <Img
-          fluid={pic}
-          className={numPicsWide === 1 ? "pic-full" : "pic"}
-        />
+        <Img fluid={pic} className={numPicsWide === 1 ? "pic-full" : "pic"} />
       </button>
     )
   })
@@ -93,7 +56,7 @@ export default function IndexPage({ data }) {
   useEffect(() => {
     /* Observe all elements with the fade-in class, give them the appear class on intersection */
     const fadingImages = document.querySelectorAll(".fade-in")
-    const appearOptions = {threshold: 0.25}
+    const appearOptions = { threshold: 0.25 }
     /* setting up intersection observer */
     const appearOnScroll = new IntersectionObserver(function (
       entries,
@@ -142,8 +105,7 @@ export default function IndexPage({ data }) {
 
       {/* Modal element for clicking on image */}
       <Modal
-        modalImage={modalImage}
-        modalInfo={modalInfo}
+        markdown={modalMarkdown}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
@@ -153,37 +115,24 @@ export default function IndexPage({ data }) {
 
 export const query = graphql`
   query {
-    allImageSharp {
+    allMarkdownRemark {
       edges {
         node {
-          parent {
-            ... on File {
-              relativeDirectory
+          frontmatter {
+            title
+            media
+            description
+            image {
+              childImageSharp {
+                square: fluid(maxWidth: 700, maxHeight: 700) {
+                  ...GatsbyImageSharpFluid
+                }
+                originalAspect: fluid(maxWidth: 1000) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
             }
           }
-          square: fluid(maxWidth: 700, maxHeight: 700) {
-            ...GatsbyImageSharpFluid
-            originalName
-          }
-          originalAspect: fluid(maxWidth: 1000) {
-            ...GatsbyImageSharpFluid
-          }
-          id
-        }
-      }
-    }
-    allInfo {
-      edges {
-        node {
-          parent {
-            ... on File {
-              relativeDirectory
-            }
-          }
-          title
-          size
-          medium
-          description
         }
       }
     }
