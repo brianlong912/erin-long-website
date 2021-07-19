@@ -8,24 +8,10 @@ function Modal(props) {
   const [picWidth, setPicWidth] = useState(0)
   const [screenWidth, setScreenWidth] = useState()
   const [closeFocus, setCloseFocus] = useState(false);
-
-  /* Conditionally render the Image Info with the modal */
-  let info
-  if (props.modalInfo) {
-    info = (
-      <div>
-        <div>{props.modalInfo.node.title}</div>
-        <div>{props.modalInfo.node.medium}</div>
-        <div>{props.modalInfo.node.size}</div>
-        <br />
-        <div>{props.modalInfo.node.description}</div>
-      </div>
-    )
-  }
-
+  
   /* Update the size of the picture wrapper for fluid pic */
   useEffect(() => {
-    let aspect = props.modalImage.node.originalAspect.aspectRatio
+    let aspect = props.markdown.frontmatter.image.childImageSharp.originalAspect.aspectRatio
     let clientW = document.documentElement.clientWidth
     let clientH = document.documentElement.clientHeight
     let w = aspect * clientH * 0.9
@@ -34,7 +20,7 @@ function Modal(props) {
     }
     setPicWidth(w)
   }, [
-    props.modalImage.node.originalAspect.aspectRatio,
+    props.markdown.frontmatter.image.childImageSharp,
     props.modalVisible,
     screenWidth,
   ])
@@ -105,16 +91,13 @@ function Modal(props) {
           id="modal-pic"
           style={{ width: picWidth + "px", flex: "0 0 " + picWidth + "px" }}
         >
-          <Img fluid={props.modalImage.node.originalAspect} />
+          <Img fluid={props.markdown.frontmatter.image.childImageSharp.originalAspect} />
         </div>
         {/* Modal Information to be shown, relating to the image */}
-        <div
-          id="modal-info"
-          style={{
-            display: info ? "block" : "none",
-          }}
-        >
-          {info}
+        <div id="modal-info">
+          <h3>{props.markdown.frontmatter.title}</h3>
+          <h4>{props.markdown.frontmatter.media}</h4>
+          <p>{props.markdown.frontmatter.description}</p>
         </div>
       </div>
     </div>
