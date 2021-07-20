@@ -8,24 +8,21 @@ import SEO from "../components/seo"
 import "../styles/about.css"
 
 export default function About({ data }) {
-  /* only use the info for the about page, so the node that has a name is used (imageInfo has title, size, and description) */
-  const aboutInfo = data.allInfo.edges.find(e => {
-    return e.node.name
-  })
-
+  const img = data.markdownRemark.frontmatter.image.childImageSharp.fluid
+  const  html = data.markdownRemark.html;
   return (
     <Layout>
       <SEO title="About" />
-      <div
-        className="about-content"
-      >
+      <div className="about-content">
         <div id="about-image">
-          {/* Custom image, queried with exact name in graphql below */}
-          <Img fluid={data.imageSharp.fluid} />
+          <Img
+            fluid={img}
+          />
         </div>
-        <div id="about-info">
-          <div>{aboutInfo.node.description}</div>
-        </div>
+        <div
+          id="about-info"
+          dangerouslySetInnerHTML={{ __html: html }}
+        ></div>
       </div>
     </Layout>
   )
@@ -33,17 +30,16 @@ export default function About({ data }) {
 
 export const query = graphql`
   query {
-    allInfo {
-      edges {
-        node {
-          name
-          description
+    markdownRemark(frontmatter: { title: { eq: "About" } }) {
+      html
+      frontmatter {
+        image {
+          childImageSharp {
+            fluid(maxWidth: 700, maxHeight: 700) {
+              ...GatsbyImageSharpFluid
+            }
+          }
         }
-      }
-    }
-    imageSharp(fluid: { originalName: { eq: "erin.jpg" } }) {
-      fluid(maxWidth: 700, maxHeight: 700) {
-        ...GatsbyImageSharpFluid
       }
     }
   }
