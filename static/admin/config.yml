@@ -7,15 +7,16 @@ public_folder: "/static"
 
 collections:
   - name: 'images'
-    label: 'Images'
+    label: 'Image'
     folder: 'src/images'
     create: true
     slug: 'index'
     media_folder: ''
     public_folder: ''
-    path: '{{title}}/index'
+    path: '{{folder}}/index'
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Media', name: 'media', widget: 'string' }
       - { label: 'Description', name: 'description', widget: 'string' }
-      - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Folder name', name: 'folder', widget: 'string', default: '{{title}}'}
+      - { label: 'Image', name: 'image', widget: 'image'}

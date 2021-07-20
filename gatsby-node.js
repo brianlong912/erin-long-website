@@ -9,13 +9,11 @@
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
-    type Info implements Node {
+    type MarkdownRemarkFrontmatter implements Node {
       title: String
       size: String
-      medium: String
+      media: String
       description: String
-      name: String
-      email: String
     }
   `
   createTypes(typeDefs)
