@@ -115,7 +115,7 @@ export default function IndexPage({ data }) {
 
 export const query = graphql`
   query {
-    allMarkdownRemark {
+    allMarkdownRemark (sort: {order: ASC, fields: frontmatter___image___dir}) {
       edges {
         node {
           frontmatter {
